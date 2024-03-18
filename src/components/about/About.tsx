@@ -54,7 +54,7 @@ const About = () => {
               opacity: 1,
             }}
             viewport={{ once: true }}
-            transition={{ duration: 0.25, delay: 0.75 }}
+            transition={{ duration: 0.25 }}
             className="w-full md:w-1/2"
           >
             <p className="text-balance text-center indent-4 text-xl md:text-2xl">

@@ -58,11 +58,6 @@ export const BentoGridItem = ({
 }: BentoGridItemProps) => {
   return (
     <motion.div
-      // initial={{ y: 50, opacity: 0 }}
-      // whileInView={{ y: 0, opacity: 1 }}
-      // transition={{ duration: 0.3, type: "" }}
-      // // whileInView={{opacity: }}
-      // viewport={{ once: true }}
       initial="offscreen"
       whileInView="onscreen"
       viewport={{ once: true }}
