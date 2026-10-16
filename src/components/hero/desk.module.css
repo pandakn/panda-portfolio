@@ -1,0 +1,131 @@
+.figure {
+  position: relative;
+  width: 100%;
+  margin: 0;
+  isolation: isolate;
+}
+.figure::before {
+  content: "";
+  position: absolute;
+  inset: 15% 5% 15%;
+  background: radial-gradient(
+    ellipse,
+    #e7eadcaa,
+    #f5efe744 55%,
+    transparent 73%
+  );
+  z-index: -1;
+}
+.scene {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1.15;
+}
+.scene canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  cursor: grab;
+  border-radius: 24px;
+}
+.scene canvas:active {
+  cursor: grabbing;
+}
+.scene canvas:focus-visible {
+  outline: 2px solid #658474;
+  outline-offset: -4px;
+}
+.scene[data-ready="false"] {
+  visibility: hidden;
+}
+.fallback {
+  position: absolute;
+  inset: 0;
+  background: url("/desk-preview.webp") center / contain no-repeat;
+  pointer-events: none;
+}
+.topline {
+  position: absolute;
+  top: 2%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  white-space: nowrap;
+  font-family: monospace;
+  font-size: 9px;
+  letter-spacing: 1.4px;
+  color: #6e786c;
+}
+.dot {
+  height: 5px;
+  width: 5px;
+  background: #758d69;
+  border-radius: 50%;
+}
+.caption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: -22px 7% 0;
+  position: relative;
+  color: #75796f;
+  font-size: 11px;
+}
+.controls {
+  display: flex;
+  gap: 4px;
+}
+.controls button {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid #dce0d6;
+  background: #ffffffb3;
+  transition: background 150ms;
+}
+.controls button:hover {
+  background: #e9eddf;
+}
+.controls button[aria-pressed="true"] {
+  background: #f1eddb;
+  color: #7c7047;
+}
+.controls button:focus-visible {
+  outline: 2px solid #658474;
+  outline-offset: 3px;
+}
+.controls button:disabled {
+  opacity: 0.4;
+}
+.hint {
+  text-align: center;
+  color: #8a8c82;
+  font: 10px monospace;
+  letter-spacing: 0.8px;
+  margin: 10px 0 0;
+}
+.hint span {
+  margin-left: 6px;
+}
+@media (max-width: 767px) {
+  .scene {
+    aspect-ratio: 1.1;
+  }
+  .caption {
+    margin-inline: 3%;
+    font-size: 10px;
+  }
+  .topline {
+    font-size: 8px;
+    letter-spacing: 1px;
+  }
+  .controls button {
+    width: 44px;
+    height: 44px;
+  }
+}

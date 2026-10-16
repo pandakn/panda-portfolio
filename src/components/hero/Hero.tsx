@@ -1,12 +1,21 @@
 "use client";
 
-import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Mail, StickyNote } from "lucide-react";
-import Image from "next/image";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import { RoughNotation, RoughNotationGroup } from "react-rough-notation";
-import HeroImage from "/public/hero.svg";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
+
+const DeskScene = dynamic(() => import("./DeskScene"), {
+  ssr: false,
+  loading: () => (
+    <div
+      className="aspect-[1.15] w-full bg-[url('/desk-preview.webp')] bg-contain bg-center bg-no-repeat"
+      role="img"
+      aria-label="Isometric model of my desk"
+    />
+  ),
+});
 
 const heroTexts = {
   name: "Hey, I'm Keem.",
@@ -32,11 +41,16 @@ const buttonLinks = [
 ];
 
 const Hero = () => {
+  const t = "gd";
+  const reducedMotion = useReducedMotion();
   return (
-    <div className="md:flex md:items-center md:gap-x-10">
-      <div className="md:w-1/2">
+    <section
+      aria-label="Introduction"
+      className="flex flex-col gap-y-10 pb-8 md:-mr-6 md:flex-row md:items-center md:gap-x-0 lg:-mr-12"
+    >
+      <div className="relative z-10 md:w-[44%] md:shrink-0">
         <motion.div
-          initial={{ y: 100, opacity: 0 }}
+          initial={reducedMotion ? false : { y: 30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ bounce: 0.25, type: "keyframes" }}
         >
@@ -46,18 +60,29 @@ const Hero = () => {
                 type="highlight"
                 color="#E5D4FF"
                 animationDelay={300}
+                animate={!reducedMotion}
               >
                 {heroTexts.name}
               </RoughNotation>
             </h1>
             <div className="my-6 text-xl">
               {heroTexts.introduce.first}
-              <RoughNotation type="circle" strokeWidth={2} color="#69d2e7">
+              <RoughNotation
+                type="circle"
+                strokeWidth={2}
+                color="#69d2e7"
+                animate={!reducedMotion}
+              >
                 <p className="inline-block px-2">
                   {heroTexts.introduce.second}
                 </p>
               </RoughNotation>
-              <RoughNotation type="underline" strokeWidth={3} color="#E6A4B4">
+              <RoughNotation
+                type="underline"
+                strokeWidth={3}
+                color="#E6A4B4"
+                animate={!reducedMotion}
+              >
                 <p className="inline-block pr-2">{heroTexts.introduce.third}</p>
               </RoughNotation>
               {heroTexts.introduce.fourth}
@@ -67,33 +92,30 @@ const Hero = () => {
 
         {/* button */}
         <motion.div
-          initial={{ x: -80, opacity: 0 }}
+          initial={reducedMotion ? false : { x: -20, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 0.25 }}
           className="flex gap-x-6 py-4"
         >
           {buttonLinks.map(({ title, href, icon }, idx) => (
-            <Link key={idx} href={href} target="_blank">
-              <button className="text-neutarl-700 flex items-center gap-x-1 rounded-md border border-black bg-white px-4 py-2 text-sm font-semibold uppercase transition duration-200 hover:shadow-[4px_4px_0px_0px_rgba(0,0,0)] md:gap-x-2">
-                <i className="h-5 w-5 md:h-6 md:w-6">{icon}</i>
-                {title}
-              </button>
+            <Link
+              key={idx}
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-x-1 rounded-md border border-black bg-white px-4 py-2 text-sm font-semibold uppercase text-neutral-700 transition duration-200 hover:shadow-[4px_4px_0px_0px_rgba(0,0,0)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 md:gap-x-2"
+            >
+              <i className="h-5 w-5 md:h-6 md:w-6">{icon}</i>
+              {title}
             </Link>
           ))}
         </motion.div>
       </div>
 
-      <motion.div
-        initial={{ x: 80, opacity: 0 }}
-        animate={{ x: 0, opacity: 1 }}
-        transition={{ duration: 0.25 }}
-        className="w-0 md:w-1/2"
-      >
-        <AspectRatio ratio={4 / 3}>
-          <Image className="hidden md:block" src={HeroImage} alt="hero" fill />
-        </AspectRatio>
-      </motion.div>
-    </div>
+      <div className="w-full min-w-0 md:w-[56%]">
+        <DeskScene />
+      </div>
+    </section>
   );
 };
 
