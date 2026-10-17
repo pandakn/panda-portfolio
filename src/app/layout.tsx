@@ -25,16 +25,16 @@ const handwritingFont = Caveat({
 });
 
 export const metadata: Metadata = {
-  title: "Keem Natthawut - Software Developer Portfolio",
+  title: "Keem Natthawut - Software Engineer Portfolio",
   description:
-    "Welcome to Keem's portfolio! Explore my projects and experience as a Software Developer.",
+    "Welcome to Keem's portfolio! Explore my projects and experience as a Software Engineer.",
   icons: "/me.svg",
   keywords: [
     "portfolio",
     "resume",
     "cv",
     "web portfolio",
-    "software developer",
+    "software engineer",
     "projects",
     "experience",
   ],

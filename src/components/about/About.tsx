@@ -45,7 +45,7 @@ export default function About() {
               Full browser.
             </h3>
             <p>
-              I’m Natthawut, but you can call me Keem. I’m a software developer
+              I’m Natthawut, but you can call me Keem. I’m a software engineer
               who enjoys turning “what if?” into something you can actually use.
             </p>
             <p>
@@ -62,8 +62,8 @@ export default function About() {
               <span>♪</span>
             </div>
             <h3>
-              A little music.
-              <br />A little code.
+              Playing guitar.
+              <br />Just for fun.
             </h3>
           </div>
 

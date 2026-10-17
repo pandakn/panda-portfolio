@@ -23,7 +23,7 @@ export default function Hero() {
             <br />A LOT OF <span className="fun-word">FUN.</span>
           </h1>
           <p>
-            I’m a software developer making useful tools and playful
+            I’m a software engineer making useful tools and playful
             experiments. Usually right here, at this desk.
           </p>
           <div className="studio-actions">
