@@ -132,7 +132,6 @@
     align-items: center;
     justify-content: space-between;
     height: 116px;
-    border-bottom: 1px solid hsl(var(--border));
   }
   .site-wordmark {
     display: inline-flex;
@@ -173,7 +172,6 @@
     color: var(--terracotta);
   }
   .header-socials {
-    border-left: 1px solid hsl(var(--border));
     padding-left: 22px;
   }
   .social-links {
@@ -215,7 +213,6 @@
     align-items: center;
     min-height: 660px;
     padding-block: 55px 48px;
-    border-bottom: 1px solid hsl(var(--border));
   }
   .intro-copy {
     position: relative;
@@ -325,25 +322,6 @@
     min-width: 0;
     margin-right: -4%;
   }
-  .section-label {
-    display: flex;
-    align-items: center;
-    gap: 24px;
-    color: hsl(var(--muted-foreground));
-    font-size: 0.6875rem;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-  }
-  .section-label > span:first-child {
-    white-space: nowrap;
-  }
-  .section-rule {
-    display: block;
-    height: 1px;
-    width: 100%;
-    background: hsl(var(--border));
-  }
   .section-title {
     font-family: var(--font-display), serif;
     font-size: clamp(2.5rem, 4.2vw, 3.6rem);
@@ -361,7 +339,7 @@
     align-items: center;
     gap: 100px;
     max-width: 940px;
-    margin: 62px auto 0;
+    margin: 0 auto;
   }
   .portrait-wrap {
     width: 100%;
@@ -427,7 +405,7 @@
     align-items: flex-end;
     justify-content: space-between;
     gap: 32px;
-    margin-block: 33px 38px;
+    margin-block: 0 38px;
   }
   .work-heading p {
     flex-shrink: 0;
@@ -577,7 +555,6 @@
   }
   .site-footer {
     margin-top: 100px;
-    border-top: 1px solid hsl(var(--border));
   }
   .footer-invitation {
     display: flex;
@@ -620,7 +597,6 @@
     align-items: center;
     justify-content: space-between;
     gap: 20px;
-    border-top: 1px solid hsl(var(--border));
     padding-block: 20px 28px;
     color: hsl(var(--muted-foreground));
     font-size: 0.6875rem;
@@ -716,17 +692,13 @@
     width: 100%;
     margin-right: 0;
   }
-  .section-label {
-    gap: 16px;
-    font-size: 0.625rem;
-  }
   .about-section {
     padding-block: 42px 56px;
   }
   .about-grid {
     grid-template-columns: 1fr;
     gap: 36px;
-    margin-top: 35px;
+    margin-top: 0;
   }
   .portrait-wrap {
     max-width: 250px;
@@ -740,7 +712,7 @@
   }
   .work-heading {
     display: block;
-    margin-block: 24px 28px;
+    margin-block: 0 28px;
   }
   .work-heading p {
     margin-top: 18px;

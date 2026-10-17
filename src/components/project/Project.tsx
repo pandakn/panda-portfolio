@@ -8,10 +8,6 @@ export default function Project() {
       className="work-section"
       aria-labelledby="work-heading"
     >
-      <div className="section-label">
-        <span>02 / Selected work</span>
-        <span className="section-rule" />
-      </div>
       <div className="work-heading">
         <h2 id="work-heading" className="section-title">
           A few things I’ve <SketchMark color="olive">made.</SketchMark>

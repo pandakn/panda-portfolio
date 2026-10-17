@@ -9,10 +9,6 @@ export default function About() {
       className="about-section"
       aria-labelledby="about-heading"
     >
-      <div className="section-label">
-        <span>01 / About me</span>
-        <span className="section-rule" />
-      </div>
       <div className="about-grid">
         <div className="portrait-wrap">
           <div className="portrait-frame">
