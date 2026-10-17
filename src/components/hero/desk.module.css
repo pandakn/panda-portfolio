@@ -4,7 +4,8 @@
   margin: 0;
   isolation: isolate;
 }
-.figure::before {
+.figure::before,
+.figure::after {
   content: "";
   position: absolute;
   inset: 15% 5% 15%;
@@ -16,9 +17,9 @@
   );
   z-index: -1;
   border-radius: 30%;
-  transition: background 250ms;
 }
-.figure[data-night="true"]::before {
+.figure::after {
+  opacity: var(--night-mix, 0);
   background: radial-gradient(
     ellipse,
     #333a43cc,
@@ -133,7 +134,6 @@
   margin-left: 6px;
 }
 @media (prefers-reduced-motion: reduce) {
-  .figure::before,
   .controls button {
     transition: none;
   }

@@ -86,30 +86,57 @@ export default function DeskScene() {
     floor.position.y = -0.29;
     floor.receiveShadow = true;
     scene.add(floor);
-    function setLighting(on: boolean) {
-      desk.setLamp(on);
-      ambient.intensity = on ? 0.45 : 2.2;
-      ambient.color.set(on ? "#b9c4de" : "#f4f7ff");
-      ambient.groundColor.set(on ? "#66523c" : "#a5a18d");
-      sunlight.intensity = on ? 0.16 : 3.2;
-      sunlight.color.set(on ? "#b6c4e3" : "#fff4e2");
-      renderer.toneMappingExposure = on ? 0.95 : 1.15;
-      floorMaterial.opacity = on ? 0.035 : 0.13;
+    const daylight = {
+      sky: new THREE.Color("#f4f7ff"),
+      ground: new THREE.Color("#a5a18d"),
+      sun: new THREE.Color("#fff4e2"),
+    };
+    const night = {
+      sky: new THREE.Color("#b9c4de"),
+      ground: new THREE.Color("#66523c"),
+      sun: new THREE.Color("#b6c4e3"),
+    };
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let lightLevel = 0;
+    let transition: { from: number; to: number; startedAt: number } | null =
+      null;
+    function setLighting(level: number) {
+      lightLevel = level;
+      desk.setLamp(level);
+      ambient.intensity = THREE.MathUtils.lerp(2.2, 0.45, level);
+      ambient.color.lerpColors(daylight.sky, night.sky, level);
+      ambient.groundColor.lerpColors(daylight.ground, night.ground, level);
+      sunlight.intensity = THREE.MathUtils.lerp(3.2, 0.16, level);
+      sunlight.color.lerpColors(daylight.sun, night.sun, level);
+      renderer.toneMappingExposure = THREE.MathUtils.lerp(1.15, 0.95, level);
+      floorMaterial.opacity = THREE.MathUtils.lerp(0.13, 0.035, level);
+      container?.parentElement?.style.setProperty("--night-mix", String(level));
     }
-    setLighting(false);
+    setLighting(0);
 
     let visible = true;
     let frame = 0;
     function render() {
       cancelAnimationFrame(frame);
-      frame = requestAnimationFrame(() => {
+      frame = requestAnimationFrame((now) => {
         if (
           visible &&
           !document.hidden &&
           !renderer.getContext().isContextLost()
         ) {
+          if (transition) {
+            const progress = reducedMotion.matches
+              ? 1
+              : Math.min((now - transition.startedAt) / 1000, 1);
+            const eased = progress * progress * (3 - 2 * progress);
+            setLighting(
+              THREE.MathUtils.lerp(transition.from, transition.to, eased),
+            );
+            if (progress === 1) transition = null;
+          }
           renderer.render(scene, camera);
           setStatus("ready");
+          if (transition) render();
         }
       });
     }
@@ -170,7 +197,11 @@ export default function DeskScene() {
         render();
       },
       light: (on) => {
-        setLighting(on);
+        transition = {
+          from: lightLevel,
+          to: on ? 1 : 0,
+          startedAt: performance.now(),
+        };
         render();
       },
     };

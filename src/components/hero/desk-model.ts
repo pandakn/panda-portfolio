@@ -346,13 +346,17 @@ export function createDesk() {
   cylinder(0.21, 0.045, [-2.66, 2.09, 0.08], material("#80573c"));
   cylinder(0.17, 0.008, [-2.66, 2.117, 0.08], taupe);
 
+  const lampOffColor = new THREE.Color("#c7c4b9");
+  const lampOnColor = new THREE.Color("#fff1c6");
   return {
     group,
-    setLamp(on: boolean) {
-      lamp.visible = on;
-      bounce.visible = on;
-      lampMaterial.color.set(on ? "#fff1c6" : "#c7c4b9");
-      lampMaterial.emissiveIntensity = on ? 3 : 0;
+    setLamp(level: number) {
+      lamp.visible = level > 0;
+      bounce.visible = level > 0;
+      lamp.intensity = 34 * level;
+      bounce.intensity = 3 * level;
+      lampMaterial.color.lerpColors(lampOffColor, lampOnColor, level);
+      lampMaterial.emissiveIntensity = 3 * level;
     },
     dispose() {
       lamp.shadow.dispose();
