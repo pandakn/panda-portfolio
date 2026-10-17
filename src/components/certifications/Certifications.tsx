@@ -17,7 +17,6 @@ export default function Certifications() {
       </h2>
       <article className="certification-card">
         <div className="certification-copy">
-          <p className="certification-issuer">Amazon Web Services</p>
           <h3>AWS Certified Solutions Architect</h3>
           <p className="certification-level">Associate</p>
           <dl className="certification-dates">

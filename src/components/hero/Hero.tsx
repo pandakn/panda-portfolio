@@ -11,10 +11,6 @@ const DeskScene = dynamic(() => import("./DeskScene"), {
 export default function Hero() {
   return (
     <section className="workbench-hero" aria-labelledby="hero-title">
-      <div className="hero-meta">
-        <span>THE PERSONAL WORKSPACE OF NATTHAWUT KLANGYOD</span>
-        <span>IDEAS → CODE → REAL THINGS</span>
-      </div>
       <div className="studio-intro">
         <div className="studio-copy">
           <div className="hello-label">
@@ -45,22 +41,9 @@ export default function Hero() {
           </div>
         </div>
         <div className="studio-model">
-          <div className="model-heading">
-            <span>FIG. 01 / MY LITTLE CORNER</span>
-            <span aria-hidden="true">✳</span>
-          </div>
           <DeskScene />
-          <p className="model-note">
-            Make yourself at home. <span>Drag to look around ↗</span>
-          </p>
+          <p className="model-hint">Drag to look around</p>
         </div>
-      </div>
-      <div className="hero-footnote">
-        <span>
-          <i /> SOFTWARE DEVELOPER
-        </span>
-        <span>BUILT WITH CARE. AND A LITTLE CHAOS.</span>
-        <a href="#project">THE PROJECT BOARD IS JUST BELOW ↓</a>
       </div>
     </section>
   );

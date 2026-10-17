@@ -15,7 +15,6 @@ export default function Home() {
       >
         <div className="section-heading">
           <div>
-            <span className="eyebrow">01 / OFF THE DRAWING BOARD</span>
             <h2 id="work-heading">
               Things I’ve made
               <span className="pink-star" aria-hidden="true">
@@ -23,28 +22,9 @@ export default function Home() {
               </span>
             </h2>
           </div>
-          <p className="hand-note">
-            A few ideas that escaped
-            <br />
-            my notes app. ↙
-          </p>
         </div>
         <div className="cutting-mat">
-          <div className="mat-ruler" aria-hidden="true">
-            <span>0</span>
-            <span>5</span>
-            <span>10</span>
-            <span>15</span>
-            <span>20</span>
-            <span>25</span>
-            <span>30</span>
-            <span>35</span>
-            <span>40</span>
-          </div>
-          <div className="mat-caption">
-            <span>KEEM’S PROJECT BOARD</span>
-            <span>A1 / ALWAYS A WORK IN PROGRESS</span>
-          </div>
+          <div className="mat-ruler" aria-hidden="true" />
           <div className="collage-grid">
             {projectsData.map((project, index) => (
               <article
@@ -52,10 +32,6 @@ export default function Home() {
                 className={`work-paper paper-${index + 1}`}
               >
                 <span className="tape" aria-hidden="true" />
-                <div className="paper-top">
-                  <span>EXPERIMENT / {String(index + 1).padStart(2, "0")}</span>
-                  <span aria-hidden="true">✦</span>
-                </div>
                 <div className="paper-preview">{project.header}</div>
                 <div className="paper-details">
                   <h3>
@@ -77,7 +53,7 @@ export default function Home() {
                       rel="noopener noreferrer"
                       aria-label={`${project.title} source code on GitHub`}
                     >
-                      SOURCE ↗
+                      Code ↗
                     </a>
                   </div>
                 </div>
@@ -85,7 +61,6 @@ export default function Home() {
             ))}
           </div>
           <div className="mat-bottom">
-            <span>✂ CUT FROM CURIOSITY</span>
             <a
               href="https://github.com/pandakn"
               target="_blank"

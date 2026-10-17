@@ -6,7 +6,6 @@ export default function Footer() {
     <footer id="footer" className="site-footer">
       <div className="footer-invitation">
         <div>
-          <p className="eyebrow">Have something in mind?</p>
           <a
             className="footer-heading"
             href="mailto:natthawut.klangyod@gmail.com"

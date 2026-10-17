@@ -9,7 +9,6 @@ export default function About() {
     >
       <div className="section-heading">
         <div>
-          <span className="eyebrow">02 / THE HUMAN BEHIND THE TABS</span>
           <h2 id="human-heading">
             A little about me
             <span className="pink-star" aria-hidden="true">
@@ -17,11 +16,6 @@ export default function About() {
             </span>
           </h2>
         </div>
-        <p className="hand-note">
-          A few things that
-          <br />
-          make me, me. ↙
-        </p>
       </div>
       <div className="cork-frame">
         <div className="cork-board">
@@ -41,12 +35,10 @@ export default function About() {
               </span>
             </figcaption>
             <div className="photo-barcode" aria-hidden="true" />
-            <p>NATTHAWUT KLANGYOD / SOFTWARE DEVELOPER</p>
           </figure>
 
           <article className="board-bio board-paper">
             <span className="board-pin" aria-hidden="true" />
-            <span className="note-kicker">A NOTE TO THE INTERNET</span>
             <h3>
               Curious mind.
               <br />
@@ -61,16 +53,11 @@ export default function About() {
               turning a photo into tiny bricks. I learn by making things and
               seeing where the next idea goes.
             </p>
-            <span className="note-signature">
-              See you down the next rabbit hole,
-              <br />
-              <b>Keem</b>
-            </span>
+            <span className="note-signature">Keem</span>
           </article>
 
           <div className="board-music board-paper">
             <span className="tape" aria-hidden="true" />
-            <span className="note-kicker">ON REPEAT</span>
             <div className="vinyl-record" aria-hidden="true">
               <span>♪</span>
             </div>
@@ -78,17 +65,10 @@ export default function About() {
               A little music.
               <br />A little code.
             </h3>
-            <p>
-              Guitar practice meets
-              <br />
-              side-project energy.
-            </p>
           </div>
 
           <div className="curiosity-sticker" aria-hidden="true">
-            <span>FOLLOW YOUR</span>
             <b>curiosity</b>
-            <span>SEE WHAT HAPPENS</span>
           </div>
 
           <a
@@ -97,9 +77,7 @@ export default function About() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <span className="ticket-edge">ADMIT ONE</span>
             <span className="ticket-body">
-              <span className="note-kicker">LET’S CONNECT</span>
               <strong>Internet friends club</strong>
               <span>
                 Find me on LinkedIn <span aria-hidden="true">↗</span>
@@ -126,7 +104,6 @@ export default function About() {
           <span className="board-flower" aria-hidden="true">
             ✿
           </span>
-          <span className="board-caption">SMALL THINGS. BIG CURIOSITY.</span>
         </div>
       </div>
     </section>

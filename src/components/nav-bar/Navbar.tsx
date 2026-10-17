@@ -13,12 +13,8 @@ export default function Navbar() {
         </span>
       </a>
       <nav aria-label="Main navigation" className="page-nav">
-        <a href="#project">
-          The work <span>01</span>
-        </a>
-        <a href="#about">
-          The human <span>02</span>
-        </a>
+        <a href="#project">Work</a>
+        <a href="#about">About me</a>
       </nav>
       <a href="#footer" className="nav-contact">
         Say hello <span aria-hidden="true">↗</span>
