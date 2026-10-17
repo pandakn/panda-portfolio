@@ -23,20 +23,20 @@ export default function Hero() {
             <br />A LOT OF <span className="fun-word">FUN.</span>
           </h1>
           <p>
-            I’m a software engineer making useful tools and playful
-            experiments. Usually right here, at this desk.
+            I’m a software engineer making useful tools and playful experiments.
+            Usually right here, at this desk.
           </p>
           <div className="studio-actions">
             <a className="primary-link" href="#project">
               Explore my work <span aria-hidden="true">↓</span>
             </a>
             <a
-              className="text-link"
+              className="primary-link"
               href="https://ntthwt.notion.site/Natthawut-Klangyod-3dc1098ae5084158b157c78ff809f9c3?pvs=4"
               target="_blank"
               rel="noopener noreferrer"
             >
-              My résumé ↗
+              My résumé <span aria-hidden="true">↗</span>
             </a>
           </div>
         </div>

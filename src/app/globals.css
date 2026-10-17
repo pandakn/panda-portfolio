@@ -907,8 +907,11 @@ button:focus-visible {
     font-size: 14px;
   }
   .studio-actions {
-    gap: 28px;
+    gap: 16px;
     margin-top: 10px;
+  }
+  .studio-actions .primary-link {
+    gap: 10px;
   }
   .studio-model {
     padding-top: 10px;
