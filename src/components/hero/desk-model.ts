@@ -179,7 +179,9 @@ export function createDesk() {
   lamp.shadow.camera.near = 0.1;
   lamp.shadow.normalBias = 0.015;
   lamp.shadow.bias = -0.0002;
-  lamp.shadow.radius = 4;
+  lamp.shadow.radius = 2;
+  lamp.shadow.autoUpdate = false;
+  lamp.shadow.needsUpdate = true;
   // A little reflected light reaches the walls and the chair.
   const bounce = new THREE.PointLight("#ffd7a0", 3, 7, 2);
   bounce.position.set(0, 2.8, 0.9);
@@ -351,12 +353,15 @@ export function createDesk() {
   return {
     group,
     setLamp(level: number) {
-      lamp.visible = level > 0;
-      bounce.visible = level > 0;
+      // Keep both lights registered so toggles reuse the same shader programs.
+      lamp.shadow.intensity = 0.55 * level;
       lamp.intensity = 34 * level;
       bounce.intensity = 3 * level;
       lampMaterial.color.lerpColors(lampOffColor, lampOnColor, level);
       lampMaterial.emissiveIntensity = 3 * level;
+    },
+    invalidateShadows() {
+      lamp.shadow.needsUpdate = true;
     },
     dispose() {
       lamp.shadow.dispose();

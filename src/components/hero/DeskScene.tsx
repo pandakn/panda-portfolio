@@ -77,7 +77,9 @@ export default function DeskScene() {
     });
     sunlight.shadow.normalBias = 0.035;
     sunlight.shadow.bias = -0.0001;
-    sunlight.shadow.radius = 4;
+    sunlight.shadow.radius = 2;
+    sunlight.shadow.autoUpdate = false;
+    sunlight.shadow.needsUpdate = true;
     scene.add(sunlight);
     const floorGeometry = new THREE.PlaneGeometry(200, 200);
     const floorMaterial = new THREE.ShadowMaterial({ opacity: 0.13 });
@@ -107,9 +109,10 @@ export default function DeskScene() {
       ambient.color.lerpColors(daylight.sky, night.sky, level);
       ambient.groundColor.lerpColors(daylight.ground, night.ground, level);
       sunlight.intensity = THREE.MathUtils.lerp(3.2, 0.16, level);
+      sunlight.shadow.intensity = 0.7 * (1 - level);
       sunlight.color.lerpColors(daylight.sun, night.sun, level);
       renderer.toneMappingExposure = THREE.MathUtils.lerp(1.15, 0.95, level);
-      floorMaterial.opacity = THREE.MathUtils.lerp(0.13, 0.035, level);
+      floorMaterial.opacity = THREE.MathUtils.lerp(0.1, 0, level);
       container?.parentElement?.style.setProperty("--night-mix", String(level));
     }
     setLighting(0);
@@ -117,8 +120,9 @@ export default function DeskScene() {
     let visible = true;
     let frame = 0;
     function render() {
-      cancelAnimationFrame(frame);
+      if (frame) return;
       frame = requestAnimationFrame((now) => {
+        frame = 0;
         if (
           visible &&
           !document.hidden &&
@@ -127,8 +131,8 @@ export default function DeskScene() {
           if (transition) {
             const progress = reducedMotion.matches
               ? 1
-              : Math.min((now - transition.startedAt) / 1000, 1);
-            const eased = progress * progress * (3 - 2 * progress);
+              : Math.min((now - transition.startedAt) / 1400, 1);
+            const eased = progress ** 3 * (progress * (progress * 6 - 15) + 10);
             setLighting(
               THREE.MathUtils.lerp(transition.from, transition.to, eased),
             );
@@ -186,6 +190,8 @@ export default function DeskScene() {
       setStatus("fallback");
     }
     function contextRestored() {
+      sunlight.shadow.needsUpdate = true;
+      desk.invalidateShadows();
       setStatus("ready");
       render();
     }
