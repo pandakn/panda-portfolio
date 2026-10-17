@@ -3,6 +3,17 @@
 
 @layer base {
   :root {
+    color-scheme: light;
+    --page-dot: #e5e7eb;
+    --hero-highlight: #e5d4ff;
+    --room-label: #6e786c;
+    --room-muted: #75796f;
+    --room-hint: #8a8c82;
+    --room-control: #ffffffb3;
+    --room-control-hover: #e9eddf;
+    --room-control-border: #dce0d6;
+    --room-control-active: #f1eddb;
+    --room-control-active-text: #7c7047;
     --background: 0 0% 100%;
     --foreground: 240 10% 3.9%;
 
@@ -35,10 +46,21 @@
   }
 
   .dark {
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
+    color-scheme: dark;
+    --page-dot: #30343c;
+    --hero-highlight: #584566;
+    --room-label: #b0b9aa;
+    --room-muted: #b4b7ac;
+    --room-hint: #a1a69a;
+    --room-control: #25292de6;
+    --room-control-hover: #353c37;
+    --room-control-border: #4a5048;
+    --room-control-active: #443c2c;
+    --room-control-active-text: #f1d69c;
+    --background: 220 14% 10%;
+    --foreground: 45 20% 92%;
 
-    --card: 240 10% 3.9%;
+    --card: 220 12% 13%;
     --card-foreground: 0 0% 98%;
 
     --popover: 240 10% 3.9%;
@@ -76,5 +98,20 @@
   }
   body {
     @apply bg-background text-foreground;
+    background-image: radial-gradient(var(--page-dot) 1px, transparent 1px);
+    background-size: 16px 16px;
+  }
+  html {
+    @apply bg-background text-foreground;
+  }
+  html,
+  body {
+    transition: background-color 1400ms ease, color 700ms ease;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html,
+    body {
+      transition: none;
+    }
   }
 }

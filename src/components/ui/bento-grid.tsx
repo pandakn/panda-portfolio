@@ -63,7 +63,7 @@ export const BentoGridItem = ({
       viewport={{ once: true }}
       variants={cardVariants}
       className={cn(
-        "group/bento row-span-2 flex flex-col justify-between space-y-4 rounded-xl border border-gray-300 bg-white p-4 shadow-input transition duration-200 hover:shadow-xl dark:border-white/[0.2] dark:bg-black dark:shadow-none",
+        "group/bento row-span-2 flex flex-col justify-between space-y-4 rounded-xl border border-border bg-card p-4 shadow-input transition duration-200 hover:shadow-xl dark:shadow-none",
         className,
       )}
     >

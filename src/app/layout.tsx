@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
-import { Inter, Open_Sans } from "next/font/google";
+import { Open_Sans } from "next/font/google";
 import "./globals.css";
 
 // components
 import Navbar from "@/components/nav-bar/Navbar";
 import { cn } from "@/lib/utils";
 import Footer from "@/components/footer/Footer";
+import { themeInitScript } from "@/lib/theme-init";
 
 const openSans = Open_Sans({ subsets: ["latin"] });
 
@@ -31,11 +32,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
       <body
         className={cn(
           openSans.className,
-          "mx-auto my-5 min-h-screen max-w-6xl  bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] px-6 [background-size:16px_16px]",
+          "mx-auto my-5 min-h-screen max-w-6xl px-6",
           // "bg-[#F5EEE635]",
         )}
       >

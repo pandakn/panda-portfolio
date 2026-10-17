@@ -58,7 +58,7 @@ const Hero = () => {
             <h1 className=" text-4xl font-bold md:text-4xl lg:text-6xl">
               <RoughNotation
                 type="highlight"
-                color="#E5D4FF"
+                color="var(--hero-highlight)"
                 animationDelay={300}
                 animate={!reducedMotion}
               >
@@ -103,7 +103,7 @@ const Hero = () => {
               href={href}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-x-1 rounded-md border border-black bg-white px-4 py-2 text-sm font-semibold uppercase text-neutral-700 transition duration-200 hover:shadow-[4px_4px_0px_0px_rgba(0,0,0)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 md:gap-x-2"
+              className="flex items-center gap-x-1 rounded-md border border-foreground bg-background px-4 py-2 text-sm font-semibold text-foreground uppercase transition duration-200 hover:shadow-[4px_4px_0px_0px_hsl(var(--foreground))] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 motion-reduce:transition-none md:gap-x-2"
             >
               <i className="h-5 w-5 md:h-6 md:w-6">{icon}</i>
               {title}

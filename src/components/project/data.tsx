@@ -25,8 +25,8 @@ const pokedex = ["/pokedex/home-md.png"];
 const pikaGuess = ["/pika-guess/home.gif"];
 
 const Skeleton = () => (
-  <div className="flex h-full min-h-[6rem] w-full flex-1 items-center justify-center rounded-xl bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]">
-    <IconPhotoOff className="h-10 w-10 text-gray-400" />
+  <div className="flex h-full min-h-[6rem] w-full flex-1 items-center justify-center rounded-xl bg-card bg-[radial-gradient(var(--page-dot)_1px,transparent_1px)] [background-size:16px_16px]">
+    <IconPhotoOff className="h-10 w-10 text-muted-foreground" />
   </div>
 );
 

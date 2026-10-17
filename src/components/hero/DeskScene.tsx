@@ -7,6 +7,7 @@ import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { createDesk } from "./desk-model";
 import { createRoom } from "./room-model";
 import styles from "./desk.module.css";
+import { toggleLightbar, useAppearance } from "@/lib/theme";
 
 export default function DeskScene() {
   const host = useRef<HTMLDivElement>(null);
@@ -15,7 +16,7 @@ export default function DeskScene() {
     light: (on: boolean) => void;
   } | null>(null);
   const [status, setStatus] = useState<"ready" | "fallback">("fallback");
-  const [lightOn, setLightOn] = useState(false);
+  const { lightOn } = useAppearance();
 
   useEffect(() => {
     const container = host.current;
@@ -232,6 +233,10 @@ export default function DeskScene() {
     };
   }, []);
 
+  useEffect(() => {
+    actions.current?.light(lightOn);
+  }, [lightOn]);
+
   return (
     <figure
       className={styles.figure}
@@ -266,10 +271,7 @@ export default function DeskScene() {
             aria-label="Lightbar"
             aria-pressed={lightOn}
             disabled={status !== "ready"}
-            onClick={() => {
-              actions.current?.light(!lightOn);
-              setLightOn(!lightOn);
-            }}
+            onClick={toggleLightbar}
           >
             <Lightbulb size={16} aria-hidden="true" />
             <span>Lightbar: {lightOn ? "On" : "Off"}</span>
