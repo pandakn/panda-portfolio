@@ -1,17 +1,29 @@
+import { ArrowUpRight } from "lucide-react";
 import SocialMedia from "../social-media/SocialMedia";
 
-const Footer = () => {
+export default function Footer() {
   return (
-    <div
-      id="footer"
-      className="my-20 flex flex-col items-center justify-center gap-y-6 text-balance text-center"
-    >
-      <h1 className="text-base text-muted-foreground">
-        © 2024 Natthawut Klangyod. All Rights Reserved.
-      </h1>
-      <SocialMedia />
-    </div>
+    <footer id="footer" className="site-footer">
+      <div className="footer-invitation">
+        <div>
+          <p className="eyebrow">Have something in mind?</p>
+          <a
+            className="footer-heading"
+            href="mailto:natthawut.klangyod@gmail.com"
+          >
+            Let’s make it happen.
+            <ArrowUpRight aria-hidden="true" />
+          </a>
+        </div>
+        <span className="footer-sun" aria-hidden="true" />
+      </div>
+      <div className="footer-bottom">
+        <p>© {new Date().getFullYear()} Natthawut Klangyod</p>
+        <SocialMedia />
+        <a href="#main-content" className="back-top">
+          Back to top ↑
+        </a>
+      </div>
+    </footer>
   );
-};
-
-export default Footer;
+}

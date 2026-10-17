@@ -3,10 +3,11 @@ import { projectsData } from "./data";
 
 const ProjectList = () => {
   return (
-    <BentoGrid className="my-10 border md:auto-rows-[20rem]">
+    <BentoGrid>
       {projectsData.map((project, i) => (
         <BentoGridItem
-          key={i}
+          key={project.githubLink}
+          index={i + 1}
           title={project.title}
           description={project.description}
           header={project.header}

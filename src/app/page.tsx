@@ -4,7 +4,7 @@ import Project from "@/components/project/Project";
 
 export default function Home() {
   return (
-    <main className="mt-[calc(16px+28px)]">
+    <main id="main-content">
       <Hero />
       <About />
       <Project />

@@ -1,11 +1,3 @@
-"use client";
-
-import {
-  NavigationMenu,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-} from "@/components/ui/navigation-menu";
 import { IconBrandGithub, IconBrandLinkedin } from "@tabler/icons-react";
 import { NotebookPen } from "lucide-react";
 import Link from "next/link";
@@ -28,28 +20,21 @@ export const socialMedia = [
   },
 ];
 
-const SocialMedia = () => {
+export default function SocialMedia() {
   return (
-    <NavigationMenu>
-      <NavigationMenuList className="space-x-6 lg:space-x-10">
-        {socialMedia.map((menu, idx) => (
-          <NavigationMenuItem key={idx} className="first:font-bold">
-            <NavigationMenuLink asChild>
-              <Link
-                href={menu.href}
-                aria-label={menu.label}
-                className="text-sm text-primary/80 capitalize hover:text-primary lg:text-lg"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {menu.icon}
-              </Link>
-            </NavigationMenuLink>
-          </NavigationMenuItem>
-        ))}
-      </NavigationMenuList>
-    </NavigationMenu>
+    <ul className="social-links" aria-label="Social links">
+      {socialMedia.map(({ icon, label, href }) => (
+        <li key={label}>
+          <Link
+            href={href}
+            aria-label={label}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {icon}
+          </Link>
+        </li>
+      ))}
+    </ul>
   );
-};
-
-export default SocialMedia;
+}

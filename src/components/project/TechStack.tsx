@@ -57,11 +57,15 @@ type TechStackProps = {
 
 const TechStack = ({ techStack }: TechStackProps) => {
   return (
-    <div className="flex flex-wrap gap-x-3 py-8 text-muted-foreground">
+    <ul className="project-tech" aria-label="Technologies used">
       {techStack.map((t, idx) => (
-        <i key={idx}>{icons[t]}</i>
+        <li key={idx} title={t}>
+          <span role="img" aria-label={t}>
+            {icons[t]}
+          </span>
+        </li>
       ))}
-    </div>
+    </ul>
   );
 };
 

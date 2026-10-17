@@ -1,6 +1,4 @@
-import { IconPhotoOff } from "@tabler/icons-react";
-
-import { BentoGridItemProps } from "../ui/bento-grid";
+import { type BentoGridItemProps } from "../ui/bento-grid";
 import TechStack from "./TechStack";
 import Thumbnail from "./Thumbnail";
 
@@ -25,20 +23,19 @@ const pokedex = ["/pokedex/home-md.png"];
 const pikaGuess = ["/pika-guess/home.gif"];
 
 const Skeleton = () => (
-  <div className="flex h-full min-h-[6rem] w-full flex-1 items-center justify-center rounded-xl bg-card bg-[radial-gradient(var(--page-dot)_1px,transparent_1px)] [background-size:16px_16px]">
-    <IconPhotoOff className="h-10 w-10 text-muted-foreground" />
+  <div className="project-code-preview" aria-hidden="true">
+    <span className="project-code-symbol">{"{ go }"}</span>
+    <span className="project-code-label">A little less manual work.</span>
   </div>
 );
 
 export const projectsData: BentoGridItemProps[] = [
   {
     title: "SUT Schedule",
-    description: `The "SUT Schedule" project enables SUT students to efficiently plan
-        class schedules (courses from SUT-REG) while also providing a platform
-        for personalized blogs, allowing them to share insights on majors,
-        classes, and more.`,
-    header: <Thumbnail images={sutScheduleImages} />,
-    className: "md:col-span-3",
+    description:
+      "An easier way for SUT students to plan their class schedules and share stories, course insights, and advice with each other.",
+    header: <Thumbnail images={sutScheduleImages} title="SUT Schedule" />,
+    className: "project-card-wide",
     githubLink: "https://github.com/pandakn/sut-schedule",
     techStack: (
       <TechStack
@@ -54,18 +51,18 @@ export const projectsData: BentoGridItemProps[] = [
     ),
   },
   {
-    title: "SUT COURSE API (Go version)",
-    description: `scrape course data from Suranaree University of Technology's registration system.`,
+    title: "SUT Course API",
+    description:
+      "A Go API that collects course data from SUT’s registration system, making it easier to build tools for students.",
     header: <Skeleton />,
-    className: "md:col-span-1",
     githubLink: "https://github.com/pandakn/go-sut-course-api",
     techStack: <TechStack techStack={["golang", "docker", "aws"]} />,
   },
   {
     title: "Favtify",
-    description: `"Favtify" is a simple and easy-to-use tool that lets you display your 9 most-played tracks on Spotify.`,
-    header: <Thumbnail images={favtifyImages} />,
-    className: "md:col-span-2",
+    description:
+      "Your nine most-played Spotify tracks, together in one little snapshot.",
+    header: <Thumbnail images={favtifyImages} title="Favtify" />,
     webUrl: "https://favtify.vercel.app/",
     githubLink: "https://github.com/pandakn/favtify",
     techStack: (
@@ -83,9 +80,10 @@ export const projectsData: BentoGridItemProps[] = [
   },
   {
     title: "Suggestify",
-    description: `"Suggestify" is a tool that recommends 12 awesome Spotify tracks that come from your taste and lets you add them to your playlist hassle-free!.`,
-    header: <Thumbnail images={suggestifyImages} />,
-    className: "md:col-span-3",
+    description:
+      "Find twelve new tracks based on your Spotify taste, then save your discoveries straight to a playlist.",
+    header: <Thumbnail images={suggestifyImages} title="Suggestify" />,
+    className: "project-card-wide",
     webUrl: "https://suggestify-pnd.vercel.app/login",
     githubLink: "https://github.com/pandakn/suggestify",
     techStack: (
@@ -96,9 +94,9 @@ export const projectsData: BentoGridItemProps[] = [
   },
   {
     title: "Pika Guess",
-    description: `Project for Learning Svelte : Match Pokemon images with names, earn points.`,
-    header: <Thumbnail images={pikaGuess} />,
-    className: "md:col-span-2",
+    description:
+      "A Pokémon guessing game built while learning Svelte. Match the name to the face and see how many you know.",
+    header: <Thumbnail images={pikaGuess} title="Pika Guess" />,
     webUrl: "https://pika-guess.vercel.app/",
     githubLink: "https://github.com/pandakn/pika-guess",
     techStack: (
@@ -107,9 +105,9 @@ export const projectsData: BentoGridItemProps[] = [
   },
   {
     title: "Pokédex",
-    description: "pokedex.",
-    header: <Thumbnail images={pokedex} />,
-    className: "md:col-span-1",
+    description:
+      "A Pokémon reference built with React. A small project for exploring a very big collection of creatures.",
+    header: <Thumbnail images={pokedex} title="Pokédex" />,
     webUrl: "https://pokemon-dex-two.vercel.app/",
     githubLink: "https://github.com/pandakn/pokemon-dex?tab=readme-ov-file",
     techStack: (

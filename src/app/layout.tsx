@@ -1,14 +1,22 @@
 import type { Metadata } from "next";
-import { Open_Sans } from "next/font/google";
+import { DM_Sans, Fraunces } from "next/font/google";
 import "./globals.css";
 
-// components
 import Navbar from "@/components/nav-bar/Navbar";
 import { cn } from "@/lib/utils";
 import Footer from "@/components/footer/Footer";
 import { themeInitScript } from "@/lib/theme-init";
 
-const openSans = Open_Sans({ subsets: ["latin"] });
+const bodyFont = DM_Sans({
+  subsets: ["latin"],
+  variable: "--font-body",
+  display: "swap",
+});
+const displayFont = Fraunces({
+  subsets: ["latin"],
+  variable: "--font-display",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Keem Natthawut - Software Developer Portfolio",
@@ -36,8 +44,14 @@ export default function RootLayout({
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
-      <body className={cn(openSans.className, "min-h-screen")}>
-        <div className="mx-auto max-w-6xl px-6 py-5">
+      <body
+        className={cn(
+          bodyFont.variable,
+          displayFont.variable,
+          "min-h-screen antialiased",
+        )}
+      >
+        <div className="page-shell mx-auto max-w-6xl px-6">
           <Navbar />
           {children}
           <Footer />

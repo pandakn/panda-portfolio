@@ -6,29 +6,35 @@ import SocialMedia from "../social-media/SocialMedia";
 import MeIcon from "/public/me.svg";
 import { PullCord } from "../pull-cord";
 
-const Navbar = () => {
+export default function Navbar() {
   return (
-    <nav className="flex h-28 items-center justify-between gap-x-2 lg:mx-0">
-      <Link
-        href="/"
-        aria-label="Keem home"
-        className="-ml-2 inline-flex shrink-0 rounded-[20px] p-2 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
-      >
+    <header className="site-header">
+      <a href="#main-content" className="skip-link">
+        Skip to content
+      </a>
+      <Link href="/" aria-label="Keem home" className="site-wordmark">
         <Image
           src={MeIcon}
           alt="logo"
           width={60}
           height={60}
           className="h-auto w-[60px]"
-          priority={true}
+          priority
         />
+        <span>
+          Keem<span className="wordmark-dot">.</span>
+        </span>
       </Link>
-      <div className="flex items-center gap-4 sm:gap-6">
-        <SocialMedia />
+      <div className="header-right">
+        <nav aria-label="Main navigation" className="page-nav">
+          <a href="#about">About</a>
+          <a href="#project">Work</a>
+        </nav>
+        <div className="header-socials">
+          <SocialMedia />
+        </div>
         <PullCord />
       </div>
-    </nav>
+    </header>
   );
-};
-
-export default Navbar;
+}

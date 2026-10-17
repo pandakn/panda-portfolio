@@ -11,8 +11,8 @@
   inset: 15% 5% 15%;
   background: radial-gradient(
     ellipse,
-    #e7eadcaa,
-    #f5efe744 55%,
+    #dfd0a966,
+    #efe1c433 55%,
     transparent 73%
   );
   z-index: -1;
@@ -22,8 +22,8 @@
   opacity: var(--night-mix, 0);
   background: radial-gradient(
     ellipse,
-    #333a43cc,
-    #6b625d70 55%,
+    #32291dcc,
+    #7a603c55 55%,
     transparent 73%
   );
 }

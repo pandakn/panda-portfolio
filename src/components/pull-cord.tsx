@@ -152,7 +152,7 @@ export function PullCord({ className }: { className?: string }) {
           suppressClick.current = false;
         }}
       >
-        <span className="flex h-8 w-8 items-center justify-center rounded-full border border-border bg-background shadow-sm dark:border-amber-200/40 dark:bg-amber-100 dark:text-amber-950">
+        <span className="flex h-8 w-8 items-center justify-center rounded-full border border-border bg-background shadow-sm dark:border-[var(--ochre)] dark:bg-[var(--ochre)] dark:text-[#28241e]">
           <Sun size={14} className="hidden dark:block" aria-hidden="true" />
           <Moon size={14} className="dark:hidden" aria-hidden="true" />
         </span>

@@ -1,26 +1,28 @@
-"use client";
-
-import { RoughNotation } from "react-rough-notation";
 import ProjectList from "./ProjectList";
-import { motion } from "framer-motion";
+import SketchMark from "@/components/ui/SketchMark";
 
-const Project = () => {
+export default function Project() {
   return (
-    <div id="project" className="relative my-32">
-      <motion.h1
-        initial={{ x: 100, opacity: 0 }}
-        whileInView={{ x: 0, opacity: 1 }}
-        transition={{ duration: 0.25 }}
-        viewport={{ once: true }}
-        className="inline-block text-3xl font-bold uppercase md:text-4xl lg:text-6xl"
-      >
-        <RoughNotation type="underline" color="#D7E5CA" show strokeWidth={5}>
-          What I Do.
-        </RoughNotation>
-      </motion.h1>
+    <section
+      id="project"
+      className="work-section"
+      aria-labelledby="work-heading"
+    >
+      <div className="section-label">
+        <span>02 / Selected work</span>
+        <span className="section-rule" />
+      </div>
+      <div className="work-heading">
+        <h2 id="work-heading" className="section-title">
+          A few things I’ve <SketchMark color="olive">made.</SketchMark>
+        </h2>
+        <p>
+          A collection of useful tools,
+          <br />
+          experiments, and just-for-fun ideas.
+        </p>
+      </div>
       <ProjectList />
-    </div>
+    </section>
   );
-};
-
-export default Project;
+}
