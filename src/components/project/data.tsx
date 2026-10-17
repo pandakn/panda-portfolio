@@ -60,9 +60,23 @@ export const projectsData: BentoGridItemProps[] = [
   },
   {
     title: "Mayerism",
-    description:
-      "My fork of the open-source Mayerism guitar plugin. I added an envelope filter pedal to its amp and effects chain for tones that respond to your playing dynamics.",
+    description: (
+      <>
+        Forked from{" "}
+        <a
+          href="https://github.com/timpelser/Mayerism"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline underline-offset-4 hover:text-foreground"
+        >
+          Mayerism by timpelser
+        </a>
+        . I added an envelope filter pedal to its amp and effects chain for
+        tones that respond to your playing dynamics.
+      </>
+    ),
     header: <Thumbnail images={mayerismImages} title="Mayerism" />,
+    webUrl: "https://mayerism.timpelser.com/",
     githubLink: "https://github.com/pandakn/Mayerism",
     techStack: <TechStack techStack={["c++"]} />,
   },

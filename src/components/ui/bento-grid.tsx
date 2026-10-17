@@ -15,7 +15,7 @@ export function BentoGrid({
 export interface BentoGridItemProps {
   className?: string;
   title: string;
-  description: string;
+  description: React.ReactNode;
   header: React.ReactNode;
   githubLink: string;
   webUrl?: string;
