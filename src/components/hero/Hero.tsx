@@ -1,11 +1,7 @@
 "use client";
 
-import { ArrowDownRight, ArrowUpRight } from "lucide-react";
 import dynamic from "next/dynamic";
-import Link from "next/link";
-import { motion, useReducedMotion } from "framer-motion";
 import RoomLoading from "./RoomLoading";
-import SketchMark from "@/components/ui/SketchMark";
 
 const DeskScene = dynamic(() => import("./DeskScene"), {
   ssr: false,
@@ -13,61 +9,58 @@ const DeskScene = dynamic(() => import("./DeskScene"), {
 });
 
 export default function Hero() {
-  const reducedMotion = useReducedMotion();
   return (
-    <section aria-label="Introduction" className="intro-section">
-      <motion.div
-        className="intro-copy"
-        initial={reducedMotion ? false : { y: 16, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
-      >
-        <div className="intro-title-wrap">
-          <h1 className="intro-title">
-            Hey, I’m
+    <section className="workbench-hero" aria-labelledby="hero-title">
+      <div className="hero-meta">
+        <span>THE PERSONAL WORKSPACE OF NATTHAWUT KLANGYOD</span>
+        <span>IDEAS → CODE → REAL THINGS</span>
+      </div>
+      <div className="studio-intro">
+        <div className="studio-copy">
+          <div className="hello-label">
+            Hey, I’m Keem <span aria-hidden="true">↘</span>
+          </div>
+          <h1 id="hero-title">
+            A LITTLE
             <br />
-            <span>
-              <SketchMark>Keem.</SketchMark>
-            </span>
+            <span className="making">CURIOUS.</span>
+            <br />A LOT OF <span className="fun-word">FUN.</span>
           </h1>
-          <svg
-            className="atomic-star"
-            viewBox="0 0 80 80"
-            fill="currentColor"
-            aria-hidden="true"
-          >
-            <path d="M40 0 46 25 68 12 55 34 80 40 55 46 68 68 46 55 40 80 34 55 12 68 25 46 0 40 25 34 12 12 34 25Z" />
-          </svg>
+          <p>
+            I’m a software developer making useful tools and playful
+            experiments. Usually right here, at this desk.
+          </p>
+          <div className="studio-actions">
+            <a className="primary-link" href="#project">
+              Explore my work <span aria-hidden="true">↓</span>
+            </a>
+            <a
+              className="text-link"
+              href="https://ntthwt.notion.site/Natthawut-Klangyod-3dc1098ae5084158b157c78ff809f9c3?pvs=4"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              My résumé ↗
+            </a>
+          </div>
         </div>
-        <p className="intro-description">
-          I build websites and little tools that make everyday life easier.
-          Sometimes, I just make things{" "}
-          <SketchMark color="olive" type="circle">
-            for fun.
-          </SketchMark>
-        </p>
-        <div className="intro-actions">
-          <Link
-            href="mailto:natthawut.klangyod@gmail.com"
-            className="button-primary"
-          >
-            Get in touch <ArrowUpRight size={18} aria-hidden="true" />
-          </Link>
-          <Link
-            href="https://ntthwt.notion.site/Natthawut-Klangyod-3dc1098ae5084158b157c78ff809f9c3?pvs=4"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-link"
-          >
-            My résumé <ArrowUpRight size={16} aria-hidden="true" />
-          </Link>
+        <div className="studio-model">
+          <div className="model-heading">
+            <span>FIG. 01 / MY LITTLE CORNER</span>
+            <span aria-hidden="true">✳</span>
+          </div>
+          <DeskScene />
+          <p className="model-note">
+            Make yourself at home. <span>Drag to look around ↗</span>
+          </p>
         </div>
-        <a href="#project" className="intro-work-link">
-          Take a look around <ArrowDownRight size={17} aria-hidden="true" />
-        </a>
-      </motion.div>
-      <div className="intro-room">
-        <DeskScene />
+      </div>
+      <div className="hero-footnote">
+        <span>
+          <i /> SOFTWARE DEVELOPER
+        </span>
+        <span>BUILT WITH CARE. AND A LITTLE CHAOS.</span>
+        <a href="#project">THE PROJECT BOARD IS JUST BELOW ↓</a>
       </div>
     </section>
   );

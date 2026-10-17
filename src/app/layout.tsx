@@ -1,20 +1,26 @@
 import type { Metadata } from "next";
-import { DM_Sans, Fraunces } from "next/font/google";
+import { DM_Sans, Barlow_Condensed, Caveat } from "next/font/google";
 import "./globals.css";
 
 import Navbar from "@/components/nav-bar/Navbar";
 import { cn } from "@/lib/utils";
 import Footer from "@/components/footer/Footer";
-import { themeInitScript } from "@/lib/theme-init";
 
 const bodyFont = DM_Sans({
   subsets: ["latin"],
   variable: "--font-body",
   display: "swap",
 });
-const displayFont = Fraunces({
+const displayFont = Barlow_Condensed({
+  weight: ["700", "800"],
   subsets: ["latin"],
   variable: "--font-display",
+  display: "swap",
+});
+
+const handwritingFont = Caveat({
+  subsets: ["latin"],
+  variable: "--font-hand",
   display: "swap",
 });
 
@@ -40,18 +46,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
-      </head>
+    <html lang="en">
       <body
         className={cn(
           bodyFont.variable,
           displayFont.variable,
+          handwritingFont.variable,
           "min-h-screen antialiased",
         )}
       >
-        <div className="page-shell mx-auto max-w-6xl px-6">
+        <div className="page-shell">
           <Navbar />
           {children}
           <Footer />
