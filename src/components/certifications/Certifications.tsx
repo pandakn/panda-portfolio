@@ -1,5 +1,4 @@
 import Image from "next/image";
-import SketchMark from "@/components/ui/SketchMark";
 import awsBadge from "/public/aws-solutions-architect-associate.png";
 
 const credentialUrl =
@@ -13,51 +12,63 @@ export default function Certifications() {
       aria-labelledby="certifications-heading"
     >
       <h2 id="certifications-heading" className="section-title">
-        <SketchMark color="ochre">Certifications.</SketchMark>
+        Certifications.
       </h2>
       <article className="certification-card">
+        <span className="calendar-tape" aria-hidden="true" />
+        <div className="calendar-heading" aria-hidden="true">
+          <span>September</span>
+          <span>2026</span>
+        </div>
+        <div className="calendar-weekdays" aria-hidden="true">
+          {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((day) => (
+            <span key={day}>{day}</span>
+          ))}
+        </div>
+        <div className="certificate-calendar">
+          <div className="calendar-dates" aria-hidden="true">
+            {Array.from({ length: 35 }, (_, index) => (
+              <span
+                key={index}
+                className={index === 28 ? "certified-day" : undefined}
+              >
+                {index > 0 && index <= 30 ? <span>{index}</span> : null}
+              </span>
+            ))}
+          </div>
+          <div className="certification-badge">
+            <Image
+              src={awsBadge}
+              alt="AWS Certified Solutions Architect Associate badge"
+              width={180}
+              height={180}
+              sizes="(max-width: 700px) 90px, 130px"
+            />
+          </div>
+          <div
+            className="passport-stamp"
+            aria-label="AWS certified, issued September 28, 2026"
+          >
+            <span>AWS CERTIFIED</span>
+            <time dateTime="2026-09-28">28 SEP 2026</time>
+          </div>
+        </div>
         <div className="certification-copy">
-          <h3>AWS Certified Solutions Architect</h3>
-          <p className="certification-level">Associate</p>
-          <dl className="certification-dates">
-            <div>
-              <dt>Issued</dt>
-              <dd>
-                <time dateTime="2026-09-28">September 28, 2026</time>
-              </dd>
-            </div>
-            <div>
-              <dt>Expires</dt>
-              <dd>
-                <time dateTime="2029-09-28">September 28, 2029</time>
-              </dd>
-            </div>
-          </dl>
+          <div>
+            <h3>AWS Certified Solutions Architect</h3>
+            <p className="certification-level">Associate</p>
+          </div>
           <a
             href={credentialUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-link"
+            className="credential-link"
           >
-            Verify on Credly
+            View credential
             <span className="sr-only"> (opens in a new tab)</span>
             <span aria-hidden="true">↗</span>
           </a>
         </div>
-        <a
-          href={credentialUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="certification-badge"
-        >
-          <Image
-            src={awsBadge}
-            alt="Verify AWS Certified Solutions Architect Associate on Credly (opens in a new tab)"
-            width={180}
-            height={180}
-            sizes="180px"
-          />
-        </a>
       </article>
     </section>
   );
