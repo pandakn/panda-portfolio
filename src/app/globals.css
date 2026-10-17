@@ -6,9 +6,7 @@
     color-scheme: light;
     --page-dot: #e5e7eb;
     --hero-highlight: #e5d4ff;
-    --room-label: #6e786c;
     --room-muted: #75796f;
-    --room-hint: #8a8c82;
     --room-control: #ffffffb3;
     --room-control-hover: #e9eddf;
     --room-control-border: #dce0d6;
@@ -49,9 +47,7 @@
     color-scheme: dark;
     --page-dot: #30343c;
     --hero-highlight: #584566;
-    --room-label: #b0b9aa;
     --room-muted: #b4b7ac;
-    --room-hint: #a1a69a;
     --room-control: #25292de6;
     --room-control-hover: #353c37;
     --room-control-border: #4a5048;

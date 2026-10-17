@@ -55,39 +55,13 @@
   background: url("/desk-preview.webp") center / contain no-repeat;
   pointer-events: none;
 }
-.topline {
-  position: absolute;
-  top: 2%;
-  left: 50%;
-  transform: translateX(-50%);
+.controls {
   display: flex;
-  align-items: center;
-  gap: 9px;
-  white-space: nowrap;
-  font-family: monospace;
-  font-size: 9px;
-  letter-spacing: 1.4px;
-  color: var(--room-label);
-}
-.dot {
-  height: 5px;
-  width: 5px;
-  background: #758d69;
-  border-radius: 50%;
-}
-.caption {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
+  justify-content: flex-end;
+  gap: 4px;
   margin: -22px 7% 0;
   position: relative;
   color: var(--room-muted);
-  font-size: 11px;
-}
-.controls {
-  display: flex;
-  gap: 4px;
 }
 .controls button {
   display: grid;
@@ -123,16 +97,6 @@
 .controls button:disabled {
   opacity: 0.4;
 }
-.hint {
-  text-align: center;
-  color: var(--room-hint);
-  font: 10px monospace;
-  letter-spacing: 0.8px;
-  margin: 10px 0 0;
-}
-.hint span {
-  margin-left: 6px;
-}
 @media (prefers-reduced-motion: reduce) {
   .controls button {
     transition: none;
@@ -142,13 +106,8 @@
   .scene {
     aspect-ratio: 1.1;
   }
-  .caption {
+  .controls {
     margin-inline: 3%;
-    font-size: 10px;
-  }
-  .topline {
-    font-size: 8px;
-    letter-spacing: 1px;
   }
   .controls button {
     width: 44px;

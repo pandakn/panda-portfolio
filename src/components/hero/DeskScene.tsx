@@ -255,42 +255,27 @@ export default function DeskScene() {
           aria-label="Isometric wooden desk with one monitor, keyboard, speakers, plants, and laptop"
         />
       )}
-      <div className={styles.topline}>
-        <span className={styles.dot} /> MY LITTLE CORNER OF THE INTERNET
+      <div className={styles.controls}>
+        <button
+          type="button"
+          className={styles.lightToggle}
+          aria-label="Lightbar"
+          aria-pressed={lightOn}
+          disabled={status !== "ready"}
+          onClick={toggleLightbar}
+        >
+          <Lightbulb size={16} aria-hidden="true" />
+          <span>Lightbar: {lightOn ? "On" : "Off"}</span>
+        </button>
+        <button
+          type="button"
+          aria-label="Reset desk view"
+          disabled={status !== "ready"}
+          onClick={() => actions.current?.reset()}
+        >
+          <RotateCcw size={15} aria-hidden="true" />
+        </button>
       </div>
-      <figcaption className={styles.caption}>
-        <span>
-          {status === "ready"
-            ? "Made of pixels. Based on my desk."
-            : "My desk, in miniature."}
-        </span>
-        <div className={styles.controls}>
-          <button
-            type="button"
-            className={styles.lightToggle}
-            aria-label="Lightbar"
-            aria-pressed={lightOn}
-            disabled={status !== "ready"}
-            onClick={toggleLightbar}
-          >
-            <Lightbulb size={16} aria-hidden="true" />
-            <span>Lightbar: {lightOn ? "On" : "Off"}</span>
-          </button>
-          <button
-            type="button"
-            aria-label="Reset desk view"
-            disabled={status !== "ready"}
-            onClick={() => actions.current?.reset()}
-          >
-            <RotateCcw size={15} aria-hidden="true" />
-          </button>
-        </div>
-      </figcaption>
-      {status === "ready" && (
-        <p className={styles.hint}>
-          drag to explore <span aria-hidden="true">↔</span>
-        </p>
-      )}
     </figure>
   );
 }
