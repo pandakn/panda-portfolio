@@ -65,17 +65,35 @@ const Carousel = React.forwardRef<
       },
       plugins,
     );
-    const [canScrollPrev, setCanScrollPrev] = React.useState(false);
-    const [canScrollNext, setCanScrollNext] = React.useState(false);
-
-    const onSelect = React.useCallback((api: CarouselApi) => {
-      if (!api) {
-        return;
-      }
-
-      setCanScrollPrev(api.canScrollPrev());
-      setCanScrollNext(api.canScrollNext());
-    }, []);
+    const subscribe = React.useCallback(
+      (onChange: () => void) => {
+        api?.on("reInit", onChange);
+        api?.on("select", onChange);
+        return () => {
+          api?.off("reInit", onChange);
+          api?.off("select", onChange);
+        };
+      },
+      [api],
+    );
+    const getCanScrollPrev = React.useCallback(
+      () => api?.canScrollPrev() ?? false,
+      [api],
+    );
+    const getCanScrollNext = React.useCallback(
+      () => api?.canScrollNext() ?? false,
+      [api],
+    );
+    const canScrollPrev = React.useSyncExternalStore(
+      subscribe,
+      getCanScrollPrev,
+      () => false,
+    );
+    const canScrollNext = React.useSyncExternalStore(
+      subscribe,
+      getCanScrollNext,
+      () => false,
+    );
 
     const scrollPrev = React.useCallback(() => {
       api?.scrollPrev();
@@ -105,20 +123,6 @@ const Carousel = React.forwardRef<
 
       setApi(api);
     }, [api, setApi]);
-
-    React.useEffect(() => {
-      if (!api) {
-        return;
-      }
-
-      onSelect(api);
-      api.on("reInit", onSelect);
-      api.on("select", onSelect);
-
-      return () => {
-        api?.off("select", onSelect);
-      };
-    }, [api, onSelect]);
 
     return (
       <CarouselContext.Provider
@@ -206,9 +210,9 @@ const CarouselPrevious = React.forwardRef<
       variant={variant}
       size={size}
       className={cn(
-        "absolute  h-8 w-8 rounded-full",
+        "absolute h-8 w-8 rounded-full",
         orientation === "horizontal"
-          ? "-left-12 top-1/2 -translate-y-1/2"
+          ? "top-1/2 -left-12 -translate-y-1/2"
           : "-top-12 left-1/2 -translate-x-1/2 rotate-90",
         className,
       )}
@@ -237,7 +241,7 @@ const CarouselNext = React.forwardRef<
       className={cn(
         "absolute h-8 w-8 rounded-full",
         orientation === "horizontal"
-          ? "-right-12 top-1/2 -translate-y-1/2"
+          ? "top-1/2 -right-12 -translate-y-1/2"
           : "-bottom-12 left-1/2 -translate-x-1/2 rotate-90",
         className,
       )}

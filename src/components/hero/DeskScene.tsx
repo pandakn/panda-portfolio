@@ -13,9 +13,7 @@ export default function DeskScene() {
     reset: () => void;
     light: (on: boolean) => void;
   } | null>(null);
-  const [status, setStatus] = useState<"loading" | "ready" | "fallback">(
-    "loading",
-  );
+  const [status, setStatus] = useState<"ready" | "fallback">("fallback");
   const [lightOn, setLightOn] = useState(true);
 
   useEffect(() => {
@@ -25,12 +23,11 @@ export default function DeskScene() {
     try {
       renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     } catch {
-      setStatus("fallback");
       return;
     }
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.75));
     renderer.shadowMap.enabled = true;
-    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    renderer.shadowMap.type = THREE.PCFShadowMap;
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.25;
@@ -92,7 +89,14 @@ export default function DeskScene() {
     function render() {
       cancelAnimationFrame(frame);
       frame = requestAnimationFrame(() => {
-        if (visible && !document.hidden) renderer.render(scene, camera);
+        if (
+          visible &&
+          !document.hidden &&
+          !renderer.getContext().isContextLost()
+        ) {
+          renderer.render(scene, camera);
+          setStatus("ready");
+        }
       });
     }
     function resize() {
@@ -157,7 +161,6 @@ export default function DeskScene() {
       },
     };
     resize();
-    setStatus("ready");
     return () => {
       actions.current = null;
       cancelAnimationFrame(frame);
@@ -201,9 +204,7 @@ export default function DeskScene() {
         <span>
           {status === "ready"
             ? "Made of pixels. Based on my desk."
-            : status === "loading"
-              ? "Setting up my desk…"
-              : "My desk, in miniature."}
+            : "My desk, in miniature."}
         </span>
         <div className={styles.controls}>
           <button

@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { Variants, motion } from "framer-motion";
-import { Github } from "lucide-react";
+import { IconBrandGithub } from "@tabler/icons-react";
 import Link from "next/link";
 
 const cardVariants: Variants = {
@@ -70,9 +70,9 @@ export const BentoGridItem = ({
       {header}
       <div className="transition duration-200 group-hover/bento:translate-x-2">
         <Link href={githubLink} target="_blank" className="inline-block">
-          <Github className="opacity-50 hover:opacity-100" />
+          <IconBrandGithub className="opacity-50 hover:opacity-100" />
         </Link>
-        <div className="mb-2 mt-2 text-lg font-bold text-neutral-600 dark:text-neutral-200">
+        <div className="mt-2 mb-2 text-lg font-bold text-neutral-600 dark:text-neutral-200">
           {webUrl ? (
             <Link href={webUrl} className="underline" target="_blank">
               {title}
@@ -81,7 +81,7 @@ export const BentoGridItem = ({
             title
           )}
         </div>
-        <div className=" text-sm font-normal text-neutral-600 dark:text-neutral-300">
+        <div className="text-sm font-normal text-neutral-600 dark:text-neutral-300">
           {description}
         </div>
         {techStack}

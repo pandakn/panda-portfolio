@@ -6,20 +6,24 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
-import { Github, Linkedin, NotebookPen } from "lucide-react";
+import { IconBrandGithub, IconBrandLinkedin } from "@tabler/icons-react";
+import { NotebookPen } from "lucide-react";
 import Link from "next/link";
 
 export const socialMedia = [
   {
-    icon: <Github />,
+    icon: <IconBrandGithub />,
+    label: "GitHub",
     href: "https://github.com/pandakn",
   },
   {
-    icon: <Linkedin />,
+    icon: <IconBrandLinkedin />,
+    label: "LinkedIn",
     href: "https://www.linkedin.com/in/ntthwt/",
   },
   {
     icon: <NotebookPen />,
+    label: "Medium",
     href: "https://medium.com/@natthawut.k",
   },
 ];
@@ -30,14 +34,17 @@ const SocialMedia = () => {
       <NavigationMenuList className="space-x-6 lg:space-x-10">
         {socialMedia.map((menu, idx) => (
           <NavigationMenuItem key={idx} className="first:font-bold">
-            <Link href={menu.href} legacyBehavior passHref>
-              <NavigationMenuLink
-                className="text-sm capitalize text-primary/80 hover:text-primary lg:text-lg"
+            <NavigationMenuLink asChild>
+              <Link
+                href={menu.href}
+                aria-label={menu.label}
+                className="text-sm text-primary/80 capitalize hover:text-primary lg:text-lg"
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 {menu.icon}
-              </NavigationMenuLink>
-            </Link>
+              </Link>
+            </NavigationMenuLink>
           </NavigationMenuItem>
         ))}
       </NavigationMenuList>

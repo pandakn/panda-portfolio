@@ -1,6 +1,5 @@
 "use client";
 
-import { Github, Linkedin, NotebookPen } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import SocialMedia from "../social-media/SocialMedia";

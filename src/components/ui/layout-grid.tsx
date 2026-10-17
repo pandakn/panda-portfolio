@@ -6,7 +6,7 @@ import React, { useState } from "react";
 
 type Card = {
   id: number;
-  content: JSX.Element | React.ReactNode | string;
+  content: React.ReactNode;
   className: string;
   thumbnail: string;
 };
@@ -50,7 +50,7 @@ export const LayoutGrid = ({ cards }: { cards: Card[] }) => {
       <motion.div
         onClick={handleOutsideClick}
         className={cn(
-          "fixed left-0 top-0 z-10 h-screen w-screen overflow-hidden bg-black opacity-0",
+          "fixed top-0 left-0 z-10 h-screen w-screen overflow-hidden bg-black opacity-0",
           selected?.id ? "pointer-events-auto" : "pointer-events-none",
         )}
         animate={{ opacity: selected?.id ? 0.3 : 0 }}
