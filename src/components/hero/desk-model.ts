@@ -170,9 +170,20 @@ export function createDesk() {
   lampMaterial.emissive.set("#ffdc98");
   lampMaterial.emissiveIntensity = 1.4;
   box([2.05, 0.025, 0.045], [0, 4.345, -0.75], lampMaterial);
-  const lamp = new THREE.PointLight("#ffe1a4", 2, 4, 2);
-  lamp.position.set(0, 3.9, -0.3);
-  group.add(lamp);
+  box([2.05, 0.045, 0.025], [0, 4.375, -0.72], lampMaterial, 0.005);
+  const lamp = new THREE.SpotLight("#ffe3b0", 34, 10, 1.02, 0.85, 2);
+  lamp.position.set(0, 4.34, -0.65);
+  lamp.target.position.set(0.15, 2.05, 0.65);
+  lamp.castShadow = true;
+  lamp.shadow.mapSize.set(1024, 1024);
+  lamp.shadow.camera.near = 0.1;
+  lamp.shadow.normalBias = 0.015;
+  lamp.shadow.bias = -0.0002;
+  lamp.shadow.radius = 4;
+  // A little reflected light reaches the walls and the chair.
+  const bounce = new THREE.PointLight("#ffd7a0", 3, 7, 2);
+  bounce.position.set(0, 2.8, 0.9);
+  group.add(lamp, lamp.target, bounce);
 
   // Fabric mat, individually modelled keycaps, wooden wrist rest, and mouse.
   box([3.6, 0.035, 1.35], [0.48, 2.07, 0.52], fabric, 0.05);
@@ -339,9 +350,12 @@ export function createDesk() {
     group,
     setLamp(on: boolean) {
       lamp.visible = on;
-      lampMaterial.emissiveIntensity = on ? 1.4 : 0;
+      bounce.visible = on;
+      lampMaterial.color.set(on ? "#fff1c6" : "#c7c4b9");
+      lampMaterial.emissiveIntensity = on ? 3 : 0;
     },
     dispose() {
+      lamp.shadow.dispose();
       geometries.forEach((geometry) => geometry.dispose());
       materials.forEach((surface) => surface.dispose());
       textures.forEach((texture) => texture.dispose());

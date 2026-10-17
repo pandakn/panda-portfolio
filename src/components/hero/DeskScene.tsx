@@ -5,6 +5,7 @@ import { Lightbulb, RotateCcw } from "lucide-react";
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { createDesk } from "./desk-model";
+import { createRoom } from "./room-model";
 import styles from "./desk.module.css";
 
 export default function DeskScene() {
@@ -14,7 +15,7 @@ export default function DeskScene() {
     light: (on: boolean) => void;
   } | null>(null);
   const [status, setStatus] = useState<"ready" | "fallback">("fallback");
-  const [lightOn, setLightOn] = useState(true);
+  const [lightOn, setLightOn] = useState(false);
 
   useEffect(() => {
     const container = host.current;
@@ -34,7 +35,7 @@ export default function DeskScene() {
     const canvas = renderer.domElement;
     canvas.setAttribute(
       "aria-label",
-      "Interactive 3D model of my desk. Drag or use the arrow keys to rotate.",
+      "Interactive isometric room with my desk, white office chair, red guitar and amplifier. Drag or use the arrow keys to rotate.",
     );
     canvas.setAttribute("role", "img");
     canvas.tabIndex = 0;
@@ -44,11 +45,11 @@ export default function DeskScene() {
     const camera = new THREE.OrthographicCamera(-5, 5, 4, -4, 0.1, 60);
     camera.position.set(8, 10.1, 8);
     const controls = new OrbitControls(camera, canvas);
-    controls.target.set(0, 2.1, 0);
+    controls.target.set(0.3, 3, 0.6);
     controls.enablePan = false;
     controls.enableZoom = false;
-    controls.minAzimuthAngle = -0.85;
-    controls.maxAzimuthAngle = 0.95;
+    controls.minAzimuthAngle = 0.15;
+    controls.maxAzimuthAngle = 1.35;
     controls.minPolarAngle = 0.65;
     controls.maxPolarAngle = 1.35;
     controls.rotateSpeed = 0.65;
@@ -58,10 +59,12 @@ export default function DeskScene() {
     canvas.style.touchAction = "pan-y";
 
     const desk = createDesk();
-    scene.add(desk.group);
-    scene.add(new THREE.HemisphereLight("#fff9ee", "#a6b3a3", 2.5));
-    const sunlight = new THREE.DirectionalLight("#fff1d6", 3.8);
-    sunlight.position.set(-3, 8, 5);
+    const room = createRoom();
+    scene.add(desk.group, room.group);
+    const ambient = new THREE.HemisphereLight("#f4f7ff", "#a5a18d", 2.2);
+    scene.add(ambient);
+    const sunlight = new THREE.DirectionalLight("#fff4e2", 3.2);
+    sunlight.position.set(3, 9, 6);
     sunlight.castShadow = true;
     sunlight.shadow.mapSize.set(2048, 2048);
     Object.assign(sunlight.shadow.camera, {
@@ -80,9 +83,20 @@ export default function DeskScene() {
     const floorMaterial = new THREE.ShadowMaterial({ opacity: 0.13 });
     const floor = new THREE.Mesh(floorGeometry, floorMaterial);
     floor.rotation.x = -Math.PI / 2;
-    floor.position.y = 0.005;
+    floor.position.y = -0.29;
     floor.receiveShadow = true;
     scene.add(floor);
+    function setLighting(on: boolean) {
+      desk.setLamp(on);
+      ambient.intensity = on ? 0.45 : 2.2;
+      ambient.color.set(on ? "#b9c4de" : "#f4f7ff");
+      ambient.groundColor.set(on ? "#66523c" : "#a5a18d");
+      sunlight.intensity = on ? 0.16 : 3.2;
+      sunlight.color.set(on ? "#b6c4e3" : "#fff4e2");
+      renderer.toneMappingExposure = on ? 0.95 : 1.15;
+      floorMaterial.opacity = on ? 0.035 : 0.13;
+    }
+    setLighting(false);
 
     let visible = true;
     let frame = 0;
@@ -104,7 +118,7 @@ export default function DeskScene() {
       const { width, height } = container.getBoundingClientRect();
       if (!width || !height) return;
       const aspect = width / height;
-      const viewHeight = Math.max(6.6, 8.5 / aspect);
+      const viewHeight = Math.max(10.5, 14.1 / aspect);
       camera.left = (-viewHeight * aspect) / 2;
       camera.right = (viewHeight * aspect) / 2;
       camera.top = viewHeight / 2;
@@ -156,7 +170,7 @@ export default function DeskScene() {
         render();
       },
       light: (on) => {
-        desk.setLamp(on);
+        setLighting(on);
         render();
       },
     };
@@ -172,6 +186,7 @@ export default function DeskScene() {
       canvas.removeEventListener("webglcontextrestored", contextRestored);
       controls.dispose();
       desk.dispose();
+      room.dispose();
       floorGeometry.dispose();
       floorMaterial.dispose();
       sunlight.shadow.dispose();
@@ -183,7 +198,8 @@ export default function DeskScene() {
   return (
     <figure
       className={styles.figure}
-      aria-label="An isometric recreation of my desk setup"
+      data-night={lightOn}
+      aria-label="An isometric recreation of my desk in a cozy room"
     >
       <div
         className={styles.scene}
@@ -209,7 +225,8 @@ export default function DeskScene() {
         <div className={styles.controls}>
           <button
             type="button"
-            aria-label={lightOn ? "Turn desk light off" : "Turn desk light on"}
+            className={styles.lightToggle}
+            aria-label="Lightbar"
             aria-pressed={lightOn}
             disabled={status !== "ready"}
             onClick={() => {
@@ -217,7 +234,8 @@ export default function DeskScene() {
               setLightOn(!lightOn);
             }}
           >
-            <Lightbulb size={16} />
+            <Lightbulb size={16} aria-hidden="true" />
+            <span>Lightbar: {lightOn ? "On" : "Off"}</span>
           </button>
           <button
             type="button"
@@ -225,7 +243,7 @@ export default function DeskScene() {
             disabled={status !== "ready"}
             onClick={() => actions.current?.reset()}
           >
-            <RotateCcw size={15} />
+            <RotateCcw size={15} aria-hidden="true" />
           </button>
         </div>
       </figcaption>

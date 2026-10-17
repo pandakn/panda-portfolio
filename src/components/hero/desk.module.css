@@ -15,6 +15,16 @@
     transparent 73%
   );
   z-index: -1;
+  border-radius: 30%;
+  transition: background 250ms;
+}
+.figure[data-night="true"]::before {
+  background: radial-gradient(
+    ellipse,
+    #333a43cc,
+    #6b625d70 55%,
+    transparent 73%
+  );
 }
 .scene {
   position: relative;
@@ -88,6 +98,16 @@
   background: #ffffffb3;
   transition: background 150ms;
 }
+.controls .lightToggle {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  width: auto;
+  padding-inline: 12px;
+  border-radius: 22px;
+  white-space: nowrap;
+  font-size: 11px;
+}
 .controls button:hover {
   background: #e9eddf;
 }
@@ -111,6 +131,12 @@
 }
 .hint span {
   margin-left: 6px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .figure::before,
+  .controls button {
+    transition: none;
+  }
 }
 @media (max-width: 767px) {
   .scene {
