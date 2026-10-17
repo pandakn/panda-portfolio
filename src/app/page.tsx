@@ -1,4 +1,4 @@
-import Image from "next/image";
+import About from "@/components/about/About";
 import Hero from "@/components/hero/Hero";
 import { projectsData } from "@/components/project/data";
 import Certifications from "@/components/certifications/Certifications";
@@ -97,54 +97,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section
-        id="about"
-        className="human-section"
-        aria-labelledby="human-heading"
-      >
-        <div className="portrait-paper">
-          <span className="tape" aria-hidden="true" />
-          <Image
-            src="/me.jpg"
-            alt="Keem Natthawut"
-            width={400}
-            height={500}
-            sizes="(max-width: 700px) 240px, 300px"
-          />
-          <span className="hand-note">the human behind the tabs :)</span>
-          <span className="portrait-label">HELLO, WORLD!</span>
-        </div>
-        <div className="human-copy">
-          <span className="eyebrow">02 / A LITTLE ABOUT ME</span>
-          <h2 id="human-heading">
-            Curious mind.
-            <br />
-            Full browser.
-          </h2>
-          <p>
-            I’m Natthawut, but you can call me Keem. I’m a software developer
-            who enjoys turning “what if?” into something you can actually use.
-          </p>
-          <p>
-            Sometimes that’s a better way to practice guitar. Sometimes it’s
-            turning a photo into tiny bricks. I learn by making things,
-            following my curiosity, and seeing where the next idea goes.
-          </p>
-          <div className="interest-labels">
-            <span>building for the web</span>
-            <span>music & code</span>
-            <span>always learning</span>
-          </div>
-          <a
-            className="text-link"
-            href="https://www.linkedin.com/in/ntthwt/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            More about me on LinkedIn ↗
-          </a>
-        </div>
-      </section>
+      <About />
       <Certifications />
     </main>
   );
