@@ -82,16 +82,16 @@ export function createRoom() {
   }
 
   // The open sides face the camera; the original desk stays at the origin.
-  box([9.6, 0.26, 7.6], [0.4, -0.15, 0.95], trim, group, 0.1);
+  box([8.2, 0.26, 5.95], [-0.3, -0.15, 1.2], trim, group, 0.1);
   const floorColors = ["#b9aa91", "#c4b59d", "#bdaf97"].map((color) =>
     material(color),
   );
-  for (let i = 0; i < 13; i++) {
-    const z = -2.55 + i * 0.58;
+  for (let i = 0; i < 10; i++) {
+    const z = -1.39 + i * 0.58;
     const seam = i % 2 ? -0.8 : 1.4;
     for (const [left, right] of [
       [-4.34, seam],
-      [seam + 0.015, 5.14],
+      [seam + 0.015, 3.74],
     ]) {
       box(
         [right - left, 0.035, 0.565],
@@ -102,12 +102,32 @@ export function createRoom() {
       );
     }
   }
-  box([9.65, 5.65, 0.18], [0.4, 2.68, -2.88], plaster);
-  box([0.18, 5.65, 7.6], [-4.4, 2.68, 0.85], plaster);
-  box([9.5, 0.19, 0.08], [0.4, 0.12, -2.74], trim);
-  box([0.08, 0.19, 7.4], [-4.27, 0.12, 0.9], trim);
-  box([9.7, 0.12, 0.25], [0.4, 5.51, -2.88], trim);
-  box([0.25, 0.12, 7.65], [-4.4, 5.51, 0.85], trim);
+  box([8.25, 5.65, 0.18], [-0.3, 2.68, -1.72], plaster);
+  box([0.18, 5.65, 5.95], [-4.4, 2.68, 1.2], plaster);
+  box([8.1, 0.19, 0.08], [-0.3, 0.12, -1.58], trim);
+  box([0.08, 0.19, 5.75], [-4.27, 0.12, 1.2], trim);
+  box([8.3, 0.12, 0.25], [-0.3, 5.51, -1.72], trim);
+  box([0.25, 0.12, 6], [-4.4, 5.51, 1.2], trim);
+
+  // A single quiet print balances the monitor without filling the wall.
+  const artwork = new THREE.Group();
+  artwork.position.set(-4.27, 3.6, 1.45);
+  artwork.rotation.y = Math.PI / 2;
+  group.add(artwork);
+  box([1.55, 1.95, 0.07], [0, 0, 0], maple, artwork, 0.015);
+  box([1.43, 1.83, 0.015], [0, 0, 0.043], pickguard, artwork, 0.004);
+  const ink = material("#7c8978");
+  const clay = material("#b57d63");
+  const sun = mesh(
+    new THREE.SphereGeometry(0.32, 32, 16),
+    clay,
+    [0.23, 0.4, 0.06],
+    artwork,
+  );
+  sun.scale.z = 0.015;
+  box([0.52, 0.75, 0.012], [-0.27, -0.25, 0.06], ink, artwork, 0.005);
+  box([0.47, 0.34, 0.012], [0.25, -0.45, 0.06], clay, artwork, 0.005);
+  box([0.9, 0.018, 0.012], [0, -0.71, 0.06], ink, artwork, 0.004);
 
   // White ergonomic task chair, facing the monitor along negative Z.
   const chair = new THREE.Group();
@@ -153,8 +173,8 @@ export function createRoom() {
 
   // Compact blackface-style combo with woven grille and cream control knobs.
   const amp = new THREE.Group();
-  amp.position.set(3.98, 0, -1.48);
-  amp.rotation.y = -0.18;
+  amp.position.set(-3.65, 0, 2.65);
+  amp.rotation.y = 0.95;
   group.add(amp);
   box([1.35, 1.1, 0.66], [0, 0.65, 0], dark, amp, 0.07);
   const grille = material("#89897c");
@@ -184,8 +204,8 @@ export function createRoom() {
 
   // Double-cutaway Strat silhouette, six-in-line headstock and aged finish.
   const guitar = new THREE.Group();
-  guitar.position.set(3.92, 0.28, 0.17);
-  guitar.rotation.set(-0.12, -0.25, -0.13);
+  guitar.position.set(-3.55, 0.28, 1.2);
+  guitar.rotation.set(-0.12, 0.65, -0.13);
   group.add(guitar);
   const body = new THREE.Shape();
   body.moveTo(-0.08, 0.93);
@@ -290,7 +310,8 @@ export function createRoom() {
     chip.scale.set(0.025, length, 0.008);
   }
   const stand = new THREE.Group();
-  stand.position.set(3.92, 0, 0.17);
+  stand.position.set(-3.55, 0, 1.2);
+  stand.rotation.y = 0.65;
   group.add(stand);
   rod([0, 0.1, -0.16], [0, 1.02, -0.2], 0.025, dark, stand);
   for (const x of [-0.43, 0.43]) {

@@ -44,9 +44,9 @@ export default function DeskScene() {
 
     const scene = new THREE.Scene();
     const camera = new THREE.OrthographicCamera(-5, 5, 4, -4, 0.1, 60);
-    camera.position.set(8, 10.1, 8);
+    camera.position.set(7.2, 9.5, 9.2);
     const controls = new OrbitControls(camera, canvas);
-    controls.target.set(0.3, 3, 0.6);
+    controls.target.set(-0.3, 2.65, 0.9);
     controls.enablePan = false;
     controls.enableZoom = false;
     controls.minAzimuthAngle = 0.15;
@@ -150,7 +150,7 @@ export default function DeskScene() {
       const { width, height } = container.getBoundingClientRect();
       if (!width || !height) return;
       const aspect = width / height;
-      const viewHeight = Math.max(10.5, 14.1 / aspect);
+      const viewHeight = Math.max(9.6, 12.5 / aspect);
       camera.left = (-viewHeight * aspect) / 2;
       camera.right = (viewHeight * aspect) / 2;
       camera.top = viewHeight / 2;
