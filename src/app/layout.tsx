@@ -36,16 +36,12 @@ export default function RootLayout({
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
-      <body
-        className={cn(
-          openSans.className,
-          "mx-auto my-5 min-h-screen max-w-6xl px-6",
-          // "bg-[#F5EEE635]",
-        )}
-      >
-        <Navbar />
-        {children}
-        <Footer />
+      <body className={cn(openSans.className, "min-h-screen")}>
+        <div className="mx-auto max-w-6xl px-6 py-5">
+          <Navbar />
+          {children}
+          <Footer />
+        </div>
       </body>
     </html>
   );
