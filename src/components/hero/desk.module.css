@@ -31,6 +31,11 @@
   position: relative;
   width: 100%;
   aspect-ratio: 1.15;
+  opacity: 0;
+  transition: opacity 450ms ease-out;
+}
+.scene[data-ready="true"] {
+  opacity: 1;
 }
 .scene canvas {
   position: absolute;
@@ -48,12 +53,30 @@
 }
 .scene[data-ready="false"] {
   visibility: hidden;
+  pointer-events: none;
 }
-.fallback {
+.placeholder {
   position: absolute;
   inset: 0;
-  background: url("/desk-preview.webp") center / contain no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 12px;
+  color: var(--room-muted);
+  font-size: 13px;
   pointer-events: none;
+}
+.placeholderHint {
+  font-size: 12px;
+}
+.spinner {
+  animation: loading-spin 1s linear infinite;
+}
+@keyframes loading-spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 .controls {
   display: flex;
@@ -62,6 +85,9 @@
   margin: -22px 7% 0;
   position: relative;
   color: var(--room-muted);
+}
+.controlsPlaceholder {
+  height: 38px;
 }
 .controls button {
   display: grid;
@@ -98,8 +124,12 @@
   opacity: 0.4;
 }
 @media (prefers-reduced-motion: reduce) {
+  .scene,
   .controls button {
     transition: none;
+  }
+  .spinner {
+    animation: none;
   }
 }
 @media (max-width: 767px) {
@@ -111,6 +141,9 @@
   }
   .controls button {
     width: 44px;
+    height: 44px;
+  }
+  .controlsPlaceholder {
     height: 44px;
   }
 }

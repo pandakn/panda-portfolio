@@ -5,16 +5,11 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { RoughNotation, RoughNotationGroup } from "react-rough-notation";
 import { motion, useReducedMotion } from "framer-motion";
+import RoomLoading from "./RoomLoading";
 
 const DeskScene = dynamic(() => import("./DeskScene"), {
   ssr: false,
-  loading: () => (
-    <div
-      className="aspect-[1.15] w-full bg-[url('/desk-preview.webp')] bg-contain bg-center bg-no-repeat"
-      role="img"
-      aria-label="Isometric model of my desk"
-    />
-  ),
+  loading: () => <RoomLoading />,
 });
 
 const heroTexts = {

@@ -8,6 +8,7 @@ import { createDesk } from "./desk-model";
 import { createRoom } from "./room-model";
 import styles from "./desk.module.css";
 import { toggleLightbar, useAppearance } from "@/lib/theme";
+import { RoomPlaceholder } from "./RoomLoading";
 
 export default function DeskScene() {
   const host = useRef<HTMLDivElement>(null);
@@ -15,7 +16,9 @@ export default function DeskScene() {
     reset: () => void;
     light: (on: boolean) => void;
   } | null>(null);
-  const [status, setStatus] = useState<"ready" | "fallback">("fallback");
+  const [status, setStatus] = useState<"loading" | "ready" | "unavailable">(
+    "loading",
+  );
   const { lightOn } = useAppearance();
 
   useEffect(() => {
@@ -25,7 +28,8 @@ export default function DeskScene() {
     try {
       renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     } catch {
-      return;
+      const failureFrame = requestAnimationFrame(() => setStatus("unavailable"));
+      return () => cancelAnimationFrame(failureFrame);
     }
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.75));
     renderer.shadowMap.enabled = true;
@@ -120,6 +124,7 @@ export default function DeskScene() {
 
     let visible = true;
     let frame = 0;
+    let hasRendered = false;
     function render() {
       if (frame) return;
       frame = requestAnimationFrame((now) => {
@@ -140,7 +145,10 @@ export default function DeskScene() {
             if (progress === 1) transition = null;
           }
           renderer.render(scene, camera);
-          setStatus("ready");
+          if (!hasRendered) {
+            hasRendered = true;
+            setStatus("ready");
+          }
           if (transition) render();
         }
       });
@@ -188,12 +196,12 @@ export default function DeskScene() {
     canvas.addEventListener("keydown", keydown);
     function contextLost(event: Event) {
       event.preventDefault();
-      setStatus("fallback");
+      hasRendered = false;
+      setStatus("loading");
     }
     function contextRestored() {
       sunlight.shadow.needsUpdate = true;
       desk.invalidateShadows();
-      setStatus("ready");
       render();
     }
     canvas.addEventListener("webglcontextlost", contextLost);
@@ -241,19 +249,17 @@ export default function DeskScene() {
     <figure
       className={styles.figure}
       data-night={lightOn}
+      aria-busy={status === "loading"}
       aria-label="An isometric recreation of my desk in a cozy room"
     >
       <div
         className={styles.scene}
         ref={host}
         data-ready={status === "ready"}
+        aria-hidden={status !== "ready"}
       />
       {status !== "ready" && (
-        <div
-          className={styles.fallback}
-          role="img"
-          aria-label="Isometric wooden desk with one monitor, keyboard, speakers, plants, and laptop"
-        />
+        <RoomPlaceholder state={status} />
       )}
       <div className={styles.controls}>
         <button
