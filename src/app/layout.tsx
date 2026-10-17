@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   title: "Keem Natthawut - Software Developer Portfolio",
   description:
     "Welcome to Keem's portfolio! Explore my projects and experience as a Software Developer.",
-  icons: "logo.svg",
+  icons: "/me.svg",
   keywords: [
     "portfolio",
     "resume",
