@@ -4,7 +4,7 @@ import Thumbnail from "./Thumbnail";
 
 const fretFlowImages = [
   "/fret-flow/scales.webp",
-  "/fret-flow/chords.webp",
+  "/fret-flow/chords-light.webp",
   "/fret-flow/learn.webp",
   "/fret-flow/practice.webp",
   "/fret-flow/progress.webp",
