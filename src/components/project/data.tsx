@@ -2,7 +2,13 @@ import { type BentoGridItemProps } from "../ui/bento-grid";
 import TechStack from "./TechStack";
 import Thumbnail from "./Thumbnail";
 
-const fretFlowImages = ["/fret-flow/scales.webp", "/fret-flow/chords.webp"];
+const fretFlowImages = [
+  "/fret-flow/scales.webp",
+  "/fret-flow/chords.webp",
+  "/fret-flow/learn.webp",
+  "/fret-flow/practice.webp",
+  "/fret-flow/progress.webp",
+];
 const mayerismImages = [
   "/mayerism/envelope-filter.webp",
   "/mayerism/amp.webp",
