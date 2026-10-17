@@ -1,6 +1,7 @@
 import {
   IconBrandAuth0,
   IconBrandAws,
+  IconBrandCpp,
   IconBrandDocker,
   IconBrandGolang,
   IconBrandMongodb,
@@ -17,6 +18,7 @@ import {
 } from "@tabler/icons-react";
 
 const icons = {
+  "c++": <IconBrandCpp />,
   react: <IconBrandReact />,
   svelte: <IconBrandSvelte />,
   next: <IconBrandNextjs />,
@@ -34,22 +36,7 @@ const icons = {
   pokemon: <IconPokeball />,
 };
 
-type iconType =
-  | "react"
-  | "svelte"
-  | "next"
-  | "spotify"
-  | "aws"
-  | "docker"
-  | "typescript"
-  | "golang"
-  | "auth"
-  | "tailwind"
-  | "nodejs"
-  | "mongo"
-  | "vercel"
-  | "javascript"
-  | "pokemon";
+type iconType = keyof typeof icons;
 
 type TechStackProps = {
   techStack: iconType[];

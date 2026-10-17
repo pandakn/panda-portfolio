@@ -2,6 +2,14 @@ import { type BentoGridItemProps } from "../ui/bento-grid";
 import TechStack from "./TechStack";
 import Thumbnail from "./Thumbnail";
 
+const fretFlowImages = ["/fret-flow/scales.webp", "/fret-flow/chords.webp"];
+const mayerismImages = [
+  "/mayerism/envelope-filter.webp",
+  "/mayerism/amp.webp",
+  "/mayerism/post-effects.webp",
+];
+const brickrImages = ["/brickr/studs.webp", "/brickr/flat.webp"];
+
 const sutScheduleImages = [
   "/sut-schedule/home.jpeg",
   "/sut-schedule/schedule.jpeg",
@@ -30,6 +38,41 @@ const Skeleton = () => (
 );
 
 export const projectsData: BentoGridItemProps[] = [
+  {
+    title: "Fret Flow",
+    description:
+      "A guitar practice companion for exploring scales, chords, and arpeggios on an interactive fretboard. See how the notes connect, then hear them played back.",
+    header: <Thumbnail images={fretFlowImages} title="Fret Flow" />,
+    className: "project-card-wide",
+    webUrl: "https://fret-flow-guitar.vercel.app/en",
+    githubLink: "https://github.com/pandakn/fret-flow",
+    techStack: (
+      <TechStack
+        techStack={["next", "react", "typescript", "tailwind", "vercel"]}
+      />
+    ),
+  },
+  {
+    title: "Mayerism",
+    description:
+      "My fork of the open-source Mayerism guitar plugin. I added an envelope filter pedal to its amp and effects chain for tones that respond to your playing dynamics.",
+    header: <Thumbnail images={mayerismImages} title="Mayerism" />,
+    githubLink: "https://github.com/pandakn/Mayerism",
+    techStack: <TechStack techStack={["c++"]} />,
+  },
+  {
+    title: "brickr",
+    description:
+      "Turn a photo into LEGO-style pixel art, right in your browser. Play with brick sizes and stud textures, then download your mosaic and building guide.",
+    header: <Thumbnail images={brickrImages} title="brickr" />,
+    webUrl: "https://brickr.vercel.app/",
+    githubLink: "https://github.com/pandakn/brickr",
+    techStack: (
+      <TechStack
+        techStack={["next", "react", "typescript", "tailwind", "vercel"]}
+      />
+    ),
+  },
   {
     title: "SUT Schedule",
     description:
