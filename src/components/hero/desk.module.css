@@ -27,6 +27,15 @@
     transparent 73%
   );
 }
+.figure[aria-busy="true"]::before {
+  opacity: 0.4;
+}
+.figure[aria-busy="true"]::after {
+  opacity: 0;
+}
+:global(.dark) .figure[aria-busy="true"]::before {
+  opacity: 0.08;
+}
 .scene {
   position: relative;
   width: 100%;
@@ -70,12 +79,148 @@
 .placeholderHint {
   font-size: 12px;
 }
-.spinner {
-  animation: loading-spin 1s linear infinite;
+.tinyRoom {
+  --loader-ink: #696b60;
+  --loader-floor: #e4dccb;
+  --loader-edge: #c7bba3;
+  --loader-wall: #f0efe6;
+  --loader-wall-side: #e1e4d9;
+  --loader-paper: #fffdf4;
+  --loader-wood: #caa87a;
+  --loader-sage: #849477;
+  --loader-red: #d87766;
+  --loader-screen: #bed2b9;
+  --loader-screen-ink: #4c6954;
+  width: 248px;
+  max-width: 75%;
+  height: auto;
+  overflow: visible;
 }
-@keyframes loading-spin {
+:global(.dark) .tinyRoom {
+  --loader-ink: #b8bdad;
+  --loader-floor: #48483f;
+  --loader-edge: #343932;
+  --loader-wall: #343b3a;
+  --loader-wall-side: #2c3433;
+  --loader-paper: #d9dcce;
+  --loader-wood: #b69870;
+  --loader-sage: #9bad8c;
+  --loader-red: #e08b76;
+  --loader-screen: #a9c5a3;
+  --loader-screen-ink: #38513d;
+}
+.loadingCopy {
+  display: grid;
+  justify-items: center;
+  gap: 5px;
+}
+.loadingTitle {
+  color: hsl(var(--foreground));
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+.tinyFloor,
+.tinyWalls,
+.tinyDesk,
+.tinyMonitor,
+.tinyExtras {
+  animation: room-assemble 500ms cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+.tinyWalls {
+  animation-delay: 60ms;
+}
+.tinyDesk {
+  animation-delay: 120ms;
+}
+.tinyMonitor {
+  animation-delay: 180ms;
+}
+.tinyExtras {
+  animation-delay: 240ms;
+}
+.tinyEyes {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: room-blink 3.6s ease-in-out infinite;
+}
+.tinySteam {
+  animation: room-steam 2.4s ease-out infinite;
+}
+.tinySparkles {
+  animation: room-twinkle 2.4s ease-in-out infinite;
+}
+.loadingDots {
+  display: flex;
+  gap: 5px;
+  margin-top: 3px;
+}
+.loadingDots span {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: currentColor;
+  animation: room-dot 1.2s ease-in-out infinite;
+}
+.loadingDots span:nth-child(2) {
+  animation-delay: 150ms;
+}
+.loadingDots span:nth-child(3) {
+  animation-delay: 300ms;
+}
+@keyframes room-assemble {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
   to {
-    transform: rotate(360deg);
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes room-blink {
+  0%,
+  43%,
+  49%,
+  100% {
+    transform: scaleY(1);
+  }
+  46% {
+    transform: scaleY(0.1);
+  }
+}
+@keyframes room-steam {
+  0% {
+    opacity: 0;
+    transform: translateY(3px);
+  }
+  35% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+@keyframes room-twinkle {
+  0%,
+  100% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+@keyframes room-dot {
+  0%,
+  70%,
+  100% {
+    opacity: 0.3;
+    transform: translateY(0);
+  }
+  35% {
+    opacity: 1;
+    transform: translateY(-3px);
   }
 }
 .controls {
@@ -89,6 +234,9 @@
 .controlsPlaceholder {
   height: 38px;
 }
+.figure[aria-busy="true"] .controls {
+  visibility: hidden;
+}
 .controls button {
   display: grid;
   place-items: center;
@@ -97,7 +245,10 @@
   border-radius: 50%;
   border: 1px solid var(--room-control-border);
   background: var(--room-control);
-  transition: background 300ms, color 300ms, border-color 300ms;
+  transition:
+    background 300ms,
+    color 300ms,
+    border-color 300ms;
 }
 .controls .lightToggle {
   display: flex;
@@ -128,7 +279,8 @@
   .controls button {
     transition: none;
   }
-  .spinner {
+  .tinyRoom *,
+  .loadingDots span {
     animation: none;
   }
 }
