@@ -1,3 +1,5 @@
+import AvatarIcon from "./AvatarIcon";
+
 export default function Navbar() {
   return (
     <header className="site-header">
@@ -9,7 +11,8 @@ export default function Navbar() {
         aria-label="Keem, back to home"
         className="site-wordmark"
       >
-        keem<span>*</span>
+        <AvatarIcon />
+        <span className="wordmark-text">keem*</span>
       </a>
       <nav aria-label="Main navigation" className="page-nav">
         <a href="#project">Work</a>

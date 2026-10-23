@@ -24,7 +24,9 @@ export default function ProjectList() {
         <h2 id="work-heading">
           More things
           <br />
-          I&apos;ve made<span className="blue-period">.</span>
+          <span className="heading-emphasis">
+            I&apos;ve made<span className="accent-period">.</span>
+          </span>
         </h2>
         <span role="status">
           {String(count).padStart(2, "0")}{" "}

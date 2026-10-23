@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
 import { useLenis } from "lenis/react";
+import { useEffect, useRef, useState } from "react";
 import { featuredProjects } from "../project/data";
 import { useMotionPreference } from "../smooth-scroll/SmoothScroll";
 import Monitor from "./Monitor";
@@ -86,21 +86,13 @@ export default function Hero() {
       aria-labelledby="hero-title"
     >
       <div ref={stageRef} className="pin-stage">
-        <div className="stage-kicker">
-          <span>Keem · Software engineer</span>
-          <span>Selected work / 01–03</span>
-        </div>
         <h1 id="hero-title" className="hero-heading">
-          hello!
+          Hey!
           <span className="sr-only"> I&apos;m Keem, a software engineer.</span>
         </h1>
         <Monitor selectedId={selected.id} />
         <div className="featured-copy">
           <div>
-            <p className="project-counter">
-              {String(selectedIndex + 1).padStart(2, "0")} / 03 ·{" "}
-              {selected.stack}
-            </p>
             <h2 className="featured-title">{selected.title}</h2>
             <p className="featured-subtitle">{selected.tagline}</p>
           </div>
@@ -134,9 +126,6 @@ export default function Hero() {
               </button>
             ))}
           </div>
-          <span className="story-scroll-label">
-            3 projects. Scroll to explore.
-          </span>
           <a className="browse-all" href="#project">
             All projects <span aria-hidden="true">↓</span>
           </a>
