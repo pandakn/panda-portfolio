@@ -234,6 +234,59 @@ section[tabindex="-1"]:focus {
   text-align: center;
   z-index: 1;
 }
+.hero-photo-sticker {
+  position: absolute;
+  z-index: 3;
+  transform: rotate(var(--sticker-angle));
+  transition: transform 240ms var(--ease-out);
+  user-select: none;
+}
+.hero-photo-sticker img {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(2px 0 0 #fffdf5) drop-shadow(-2px 0 0 #fffdf5)
+    drop-shadow(0 2px 0 #fffdf5) drop-shadow(0 -2px 0 #fffdf5)
+    drop-shadow(2px 8px 5px #25261f26);
+}
+.hero-photo-camera {
+  --sticker-angle: -11deg;
+  top: 170px;
+  left: 8%;
+  width: clamp(130px, 14vw, 175px);
+}
+.hero-photo-mirror {
+  --sticker-angle: 9deg;
+  top: 265px;
+  right: 7%;
+  width: clamp(115px, 12vw, 150px);
+}
+.hero-photo-headphones {
+  --sticker-angle: -8deg;
+  top: 65px;
+  right: 8%;
+  width: 110px;
+}
+.hero-photo-bag {
+  --sticker-angle: 7deg;
+  top: 355px;
+  left: 22%;
+  width: 95px;
+}
+.hero-photo-guitar {
+  --sticker-angle: -7deg;
+  top: 20px;
+  left: 13%;
+  width: 100px;
+}
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .hero-photo-sticker:hover {
+    transform: translateY(-5px) rotate(calc(var(--sticker-angle) + 3deg));
+  }
+  .motion-reduced .hero-photo-sticker:hover {
+    transform: rotate(var(--sticker-angle));
+  }
+}
 .hardware-stage {
   position: absolute;
   inset: 185px 0 auto;
@@ -1063,6 +1116,28 @@ section[tabindex="-1"]:focus {
   .page-shell {
     padding-inline: 32px;
   }
+  .hero-photo-camera {
+    left: 2%;
+    width: 115px;
+  }
+  .hero-photo-mirror {
+    right: 1%;
+    width: 105px;
+  }
+  .hero-photo-headphones {
+    right: 3%;
+    width: 90px;
+  }
+  .hero-photo-bag {
+    top: 380px;
+    left: 3%;
+    width: 82px;
+  }
+  .hero-photo-guitar {
+    top: 28px;
+    left: 4%;
+    width: 80px;
+  }
   .hardware-sticker {
     right: 5%;
   }
@@ -1147,6 +1222,33 @@ section[tabindex="-1"]:focus {
     top: 66px;
     font-size: clamp(120px, 32vw, 198px);
     letter-spacing: -0.06em;
+  }
+  .hero-photo-camera {
+    top: 20px;
+    left: 3%;
+    width: clamp(56px, 13vw, 76px);
+  }
+  .hero-photo-mirror {
+    top: 24px;
+    right: 3%;
+    width: clamp(48px, 11vw, 64px);
+  }
+  .hero-photo-headphones {
+    top: 335px;
+    left: 3%;
+    right: auto;
+    width: clamp(54px, 13vw, 72px);
+  }
+  .hero-photo-bag {
+    top: 318px;
+    left: auto;
+    right: 4%;
+    width: clamp(46px, 11vw, 60px);
+  }
+  .hero-photo-guitar {
+    top: 8px;
+    left: calc(50% - 24px);
+    width: 48px;
   }
   .hardware-stage {
     top: 136px;

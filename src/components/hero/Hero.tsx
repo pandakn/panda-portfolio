@@ -1,6 +1,7 @@
 "use client";
 
 import { useLenis } from "lenis/react";
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { featuredProjects } from "../project/data";
 import { useMotionPreference } from "../smooth-scroll/SmoothScroll";
@@ -90,6 +91,68 @@ export default function Hero() {
           Hey!
           <span className="sr-only"> I&apos;m Keem, a software engineer.</span>
         </h1>
+        <div
+          className="hero-photo-sticker hero-photo-camera"
+          aria-hidden="true"
+        >
+          <Image
+            src="/stickers/keem-camera.webp"
+            alt=""
+            width={400}
+            height={541}
+            loading="eager"
+            draggable={false}
+          />
+        </div>
+        <div
+          className="hero-photo-sticker hero-photo-mirror"
+          aria-hidden="true"
+        >
+          <Image
+            src="/stickers/keem-mirror.webp"
+            alt=""
+            width={381}
+            height={655}
+            loading="eager"
+            draggable={false}
+          />
+        </div>
+        <div
+          className="hero-photo-sticker hero-photo-headphones"
+          aria-hidden="true"
+        >
+          <Image
+            src="/stickers/keem-headphones.webp"
+            alt=""
+            width={360}
+            height={413}
+            loading="eager"
+            draggable={false}
+          />
+        </div>
+        <div className="hero-photo-sticker hero-photo-bag" aria-hidden="true">
+          <Image
+            src="/stickers/keem-bag.webp"
+            alt=""
+            width={360}
+            height={630}
+            loading="eager"
+            draggable={false}
+          />
+        </div>
+        <div
+          className="hero-photo-sticker hero-photo-guitar"
+          aria-hidden="true"
+        >
+          <Image
+            src="/stickers/keem-guitar.webp"
+            alt=""
+            width={360}
+            height={472}
+            loading="eager"
+            draggable={false}
+          />
+        </div>
         <Monitor selectedId={selected.id} />
         <div className="featured-copy">
           <div>
