@@ -261,6 +261,11 @@ section[tabindex="-1"]:focus {
   isolation: isolate;
   height: calc(var(--stage-height) + 620px);
   --stage-height: max(700px, 100svh);
+  --hero-heading-size: clamp(200px, min(34vw, 36svh), 400px);
+  --hero-scene-offset: max(0px, calc((var(--stage-height) - 850px) / 2));
+  --hero-monitor-top: calc(
+    var(--hero-scene-offset) + var(--hero-heading-size) * 0.65 + 28px
+  );
   --mat-green: #315a40;
   --mat-markings: rgb(246 237 185 / 34%);
   --ink: #faf8ed;
@@ -333,11 +338,11 @@ section[tabindex="-1"]:focus {
 }
 .hero-heading {
   position: absolute;
-  inset: 58px 0 auto;
+  inset: calc(var(--hero-scene-offset) + 16px) 0 auto;
   color: var(--brand);
   font-family: var(--font-display), serif;
   font-weight: 400;
-  font-size: clamp(168px, 26vw, 310px);
+  font-size: var(--hero-heading-size);
   letter-spacing: -0.065em;
   line-height: 0.82;
   text-align: center;
@@ -360,31 +365,31 @@ section[tabindex="-1"]:focus {
 }
 .hero-photo-camera {
   --sticker-angle: -11deg;
-  top: 170px;
+  top: calc(var(--hero-scene-offset) + 170px);
   left: 8%;
   width: clamp(130px, 14vw, 175px);
 }
 .hero-photo-mirror {
   --sticker-angle: 9deg;
-  top: 265px;
+  top: calc(var(--hero-scene-offset) + 265px);
   right: 7%;
   width: clamp(115px, 12vw, 150px);
 }
 .hero-photo-headphones {
   --sticker-angle: -8deg;
-  top: 65px;
+  top: calc(var(--hero-scene-offset) + 65px);
   right: 8%;
   width: 110px;
 }
 .hero-photo-bag {
   --sticker-angle: 7deg;
-  top: 355px;
+  top: calc(var(--hero-scene-offset) + 355px);
   left: 22%;
   width: 95px;
 }
 .hero-photo-guitar {
   --sticker-angle: -7deg;
-  top: 20px;
+  top: calc(var(--hero-scene-offset) + 20px);
   left: 13%;
   width: 100px;
 }
@@ -398,7 +403,7 @@ section[tabindex="-1"]:focus {
 }
 .hardware-stage {
   position: absolute;
-  inset: 185px 0 auto;
+  inset: var(--hero-monitor-top) 0 auto;
   height: 375px;
   display: flex;
   justify-content: center;
@@ -805,7 +810,7 @@ section[tabindex="-1"]:focus {
 }
 .collection-title h2 {
   font-family: var(--font-display), serif;
-  font-size: clamp(46px, 6vw, 72px);
+  font-size: clamp(72px, 12vw, 160px);
   font-weight: 400;
   letter-spacing: -0.055em;
   line-height: 0.98;
@@ -1785,9 +1790,6 @@ section[tabindex="-1"]:focus {
   }
 }
 @media (max-height: 850px) and (min-width: 641px) {
-  .hardware-stage {
-    top: 160px;
-  }
   .monitor-rig {
     width: 350px;
   }
@@ -1826,8 +1828,11 @@ section[tabindex="-1"]:focus {
     width: 245px;
     height: 35px;
   }
-  .hero-heading {
-    font-size: clamp(168px, 24vw, 275px);
+}
+@media (max-height: 740px) and (min-width: 641px) {
+  .hardware-stage {
+    transform: scale(0.9);
+    transform-origin: center top;
   }
 }
 @media (max-width: 1000px) {
@@ -1847,7 +1852,7 @@ section[tabindex="-1"]:focus {
     width: 90px;
   }
   .hero-photo-bag {
-    top: 380px;
+    top: calc(var(--hero-scene-offset) + 380px);
     left: 3%;
     width: 82px;
   }
@@ -1927,6 +1932,11 @@ section[tabindex="-1"]:focus {
   }
   .scroll-story {
     --stage-height: max(650px, 100svh);
+    --hero-heading-size: clamp(148px, min(44vw, 26svh), 280px);
+    --hero-scene-offset: max(0px, calc((var(--stage-height) - 760px) / 2));
+    --hero-monitor-top: calc(
+      var(--hero-scene-offset) + var(--hero-heading-size) * 0.82 + 34px
+    );
     height: calc(var(--stage-height) + 360px);
   }
   .stage-kicker {
@@ -1937,39 +1947,36 @@ section[tabindex="-1"]:focus {
     display: none;
   }
   .hero-heading {
-    top: 66px;
-    font-size: clamp(120px, 32vw, 198px);
     letter-spacing: -0.06em;
   }
   .hero-photo-camera {
-    top: 20px;
+    top: calc(var(--hero-scene-offset) + 20px);
     left: 3%;
     width: clamp(56px, 13vw, 76px);
   }
   .hero-photo-mirror {
-    top: 24px;
+    top: calc(var(--hero-scene-offset) + 24px);
     right: 3%;
     width: clamp(48px, 11vw, 64px);
   }
   .hero-photo-headphones {
-    top: 335px;
+    top: calc(var(--hero-monitor-top) + 199px);
     left: 3%;
     right: auto;
     width: clamp(54px, 13vw, 72px);
   }
   .hero-photo-bag {
-    top: 318px;
+    top: calc(var(--hero-monitor-top) + 182px);
     left: auto;
     right: 4%;
     width: clamp(46px, 11vw, 60px);
   }
   .hero-photo-guitar {
-    top: 8px;
+    top: calc(var(--hero-scene-offset) + 8px);
     left: calc(50% - 24px);
     width: 48px;
   }
   .hardware-stage {
-    top: 136px;
     height: 280px;
   }
   .monitor-rig {
@@ -2089,7 +2096,11 @@ section[tabindex="-1"]:focus {
     padding: 38px 0 48px;
   }
   .collection-title h2 {
-    font-size: 44px;
+    font-size: clamp(52px, 13vw, 80px);
+  }
+  .collection-title {
+    flex-direction: column;
+    gap: 16px;
   }
   .collection-title > span {
     font-size: 11px;
