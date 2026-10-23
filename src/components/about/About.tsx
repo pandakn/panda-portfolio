@@ -9,18 +9,17 @@ export default function About() {
       aria-labelledby="human-heading"
       tabIndex={-1}
     >
-      <div className="about-collage">
-        <div className="about-copy">
-          <p className="eyebrow">A little about me</p>
+      <div className="about-board">
+        <div className="board-intro pinned-paper">
+          <p className="eyebrow">The person behind the pixels</p>
           <h2 id="human-heading">
-            Curious mind.
+            Hello,
             <br />
-            <em>Full browser.</em>
+            I’m <em>Keem.</em>
           </h2>
           <p>
-            I&apos;m Natthawut, but you can call me Keem. I&apos;m a software
-            engineer who enjoys turning a &quot;what if?&quot; into something you
-            can actually use.
+            I’m Natthawut, a software engineer who enjoys turning a “what if?”
+            into something you can actually use.
           </p>
           <div className="about-actions">
             <a
@@ -30,7 +29,7 @@ export default function About() {
               rel="noopener noreferrer"
               aria-label="Read my résumé (opens in a new tab)"
             >
-              My résumé <span aria-hidden="true">↗</span>
+              My résumé ↗
             </a>
             <a
               className="text-link"
@@ -39,81 +38,225 @@ export default function About() {
               rel="noopener noreferrer"
               aria-label="Keem on LinkedIn (opens in a new tab)"
             >
-              LinkedIn <span aria-hidden="true">↗</span>
+              LinkedIn ↗
             </a>
           </div>
-          <svg
-            className="about-doodle"
-            viewBox="0 0 120 80"
-            fill="none"
-            aria-hidden="true"
-            focusable="false"
-          >
-            <path d="M5 12C61 1 25 78 106 58m-12-8 13 8-10 12" />
-          </svg>
         </div>
 
-        <figure className="about-portrait">
+        <figure className="board-photo board-selfie taped">
           <Image
-            src="/stickers/keem-camera.webp"
-            alt="Keem looking through his camera"
-            width={400}
-            height={541}
-            sizes="(max-width: 640px) 270px, (max-width: 1000px) 340px, 400px"
+            src="/about/portrait.webp"
+            alt="Keem taking a relaxed mirror selfie at his desk"
+            width={800}
+            height={550}
+            sizes="(max-width: 640px) 85vw, 400px"
           />
-          <figcaption>
-            <span>Keem</span>
-            <small>in real life.</small>
-          </figcaption>
-          <span className="about-portrait-star" aria-hidden="true">✳</span>
+          <figcaption>the person behind the pixels :)</figcaption>
+        </figure>
+        <figure className="board-photo board-desk pinned-paper">
+          <Image
+            src="/about/desk.webp"
+            alt="Keem’s desk with two monitors, a mechanical keyboard, and plants"
+            width={650}
+            height={867}
+            sizes="(max-width: 640px) 42vw, 270px"
+          />
+          <figcaption>where the ideas happen</figcaption>
+        </figure>
+        <figure className="board-photo board-sunlight taped">
+          <Image
+            src="/about/sunlight.webp"
+            alt="Afternoon sunlight falling across Keem’s wooden desk"
+            width={600}
+            height={800}
+            sizes="(max-width: 640px) 42vw, 250px"
+          />
+          <figcaption>same desk, golden hour.</figcaption>
+        </figure>
+        <figure className="board-photo board-offline">
+          <Image
+            src="/about/offline.webp"
+            alt="A moment outside with jeans, sneakers, and wired earphones"
+            width={480}
+            height={640}
+            sizes="(max-width: 640px) 40vw, 190px"
+          />
+          <figcaption>out of office</figcaption>
         </figure>
 
-        <aside className="about-note" aria-labelledby="about-making-heading">
-          <p className="eyebrow">How I work</p>
-          <h3 id="about-making-heading">I learn by making.</h3>
+        <figure className="board-receipt taped">
+          <Image
+            src="/about/receipt.webp"
+            alt="Keem’s music receipt: D’Angelo, Mac Ayres, Stevie Wonder, Jeff Bernat, Tom Misch, Daniel Caesar, and Mint Condition. Ten songs, 49 minutes and 42 seconds."
+            width={680}
+            height={1810}
+            sizes="(max-width: 640px) 44vw, 200px"
+          />
+          <figcaption>on repeat ♫</figcaption>
+        </figure>
+        <div className="board-guitar">
+          <Image
+            src="/about/guitar.webp"
+            alt="Keem’s well-loved red electric guitar"
+            width={650}
+            height={931}
+            sizes="(max-width: 640px) 42vw, 300px"
+          />
+        </div>
+        <div className="board-note">
+          <span className="eyebrow">Away from the keyboard</span>
           <p>
-            A better way to practice guitar. A photo turned into tiny bricks.
-            I follow an idea, build something, and see where it goes.
+            One more song.
+            <br />
+            <em>Then I’ll get back to it.</em>
           </p>
-          <span className="about-note-mark" aria-hidden="true">↗</span>
-        </aside>
-
-        <figure className="about-offline">
-          <Image
-            src="/stickers/keem-guitar.webp"
-            alt=""
-            width={360}
-            height={472}
-            sizes="130px"
-          />
-          <figcaption>
-            <span className="eyebrow">Off the clock</span>
-            <p>A guitar.<br />Or a camera.</p>
-          </figcaption>
-        </figure>
-
-        <div className="about-side-effects">
-          <p className="eyebrow">Where that curiosity leads</p>
           <a
-            className="about-project-ticket about-project-ticket-music"
             href={SITE_LINKS.projects.fretFlow.website}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Explore Fret Flow, my guitar practice tool (opens in a new tab)"
           >
-            <span>Guitar practice <span aria-hidden="true">→</span> <strong>Fret Flow</strong></span>
-            <span aria-hidden="true">↗</span>
+            My guitar practice tool, Fret Flow ↗
           </a>
-          <a
-            className="about-project-ticket about-project-ticket-photos"
-            href={SITE_LINKS.projects.brickr.website}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Explore brickr, my photo to brick art tool (opens in a new tab)"
-          >
-            <span>Camera roll <span aria-hidden="true">→</span> <strong>brickr</strong></span>
-            <span aria-hidden="true">↗</span>
-          </a>
+        </div>
+        <div className="board-keepsakes" aria-hidden="true">
+          <div className="scrap-title">
+            <span>a little</span>
+            <strong>about me.</strong>
+          </div>
+          <div className="scrap-music">
+            <span>ANDANTE / 4:4</span>
+            <svg viewBox="0 0 300 110" fill="none" focusable="false">
+              <path
+                d="M0 20H300M0 34H300M0 48H300M0 62H300M0 76H300"
+                stroke="currentColor"
+              />
+              <g fill="currentColor">
+                <ellipse
+                  cx="35"
+                  cy="62"
+                  rx="8"
+                  ry="5"
+                  transform="rotate(-20 35 62)"
+                />
+                <ellipse
+                  cx="83"
+                  cy="48"
+                  rx="8"
+                  ry="5"
+                  transform="rotate(-20 83 48)"
+                />
+                <ellipse
+                  cx="125"
+                  cy="55"
+                  rx="8"
+                  ry="5"
+                  transform="rotate(-20 125 55)"
+                />
+                <ellipse
+                  cx="169"
+                  cy="41"
+                  rx="8"
+                  ry="5"
+                  transform="rotate(-20 169 41)"
+                />
+                <ellipse
+                  cx="218"
+                  cy="34"
+                  rx="8"
+                  ry="5"
+                  transform="rotate(-20 218 34)"
+                />
+                <ellipse
+                  cx="262"
+                  cy="48"
+                  rx="8"
+                  ry="5"
+                  transform="rotate(-20 262 48)"
+                />
+              </g>
+              <path
+                d="M42 62V13M90 48V5M132 55V10M176 41V0M225 34V0M269 48V5M90 6L132 11M225 1L269 6"
+                stroke="currentColor"
+                strokeWidth="2"
+              />
+            </svg>
+          </div>
+          <div className="scrap-vinyl">
+            <span>
+              KEEM’S MIX
+              <br />
+              <small>vol. 01 / slow afternoons</small>
+            </span>
+          </div>
+          <div className="scrap-camera">
+            <span className="camera-brand">little moments, kept.</span>
+            <div className="camera-screen">
+              <Image
+                src="/about/sunlight.webp"
+                alt=""
+                width={600}
+                height={800}
+                sizes="180px"
+              />
+              <span>23 / 10</span>
+            </div>
+            <span className="camera-lens" />
+            <span className="camera-flash" />
+            <span className="camera-button" />
+          </div>
+          <div className="scrap-contact">
+            <Image
+              src="/about/portrait.webp"
+              alt=""
+              width={800}
+              height={550}
+              sizes="100px"
+            />
+            <Image
+              src="/about/desk.webp"
+              alt=""
+              width={650}
+              height={867}
+              sizes="100px"
+            />
+            <Image
+              src="/about/offline.webp"
+              alt=""
+              width={480}
+              height={640}
+              sizes="100px"
+            />
+            <span>001 &nbsp; LIFE, UNFILTERED</span>
+          </div>
+          <div className="scrap-postage">
+            <span>
+              KEEP
+              <br />
+              MAKING
+            </span>
+            <strong>✿</strong>
+            <small>GOOD THINGS TAKE TIME</small>
+          </div>
+          <span className="scrap-flower">✿</span>
+          <span className="scrap-heart">♥</span>
+          <span className="scrap-star scrap-star-gold">★</span>
+          <span className="scrap-star scrap-star-red">★</span>
+          <div className="scrap-eyes">
+            <i />
+            <i />
+          </div>
+          <span className="scrap-word scrap-word-first">a work</span>
+          <span className="scrap-word scrap-word-second">in progress.</span>
+          <span className="scrap-ticket">
+            ADMIT ONE
+            <br />
+            <strong>STAY CURIOUS</strong>
+            <small>NO. 0023 · LIFETIME PASS</small>
+          </span>
+          <span className="board-label">
+            ODDS, ENDS & THINGS I LOVE / KEEM’S NOTICEBOARD
+          </span>
         </div>
       </div>
     </section>
