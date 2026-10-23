@@ -260,7 +260,7 @@ section[tabindex="-1"]:focus {
   position: relative;
   isolation: isolate;
   height: calc(var(--stage-height) + 620px);
-  --stage-height: clamp(700px, calc(100svh - 80px), 800px);
+  --stage-height: max(700px, 100svh);
   --mat-green: #315a40;
   --mat-markings: rgb(246 237 185 / 34%);
   --ink: #faf8ed;
@@ -1926,7 +1926,7 @@ section[tabindex="-1"]:focus {
     font-size: 12px;
   }
   .scroll-story {
-    --stage-height: 650px;
+    --stage-height: max(650px, 100svh);
     height: calc(var(--stage-height) + 360px);
   }
   .stage-kicker {
