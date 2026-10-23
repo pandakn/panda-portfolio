@@ -226,19 +226,62 @@ section[tabindex="-1"]:focus {
 }
 .scroll-story {
   position: relative;
+  isolation: isolate;
   height: calc(var(--stage-height) + 620px);
   --stage-height: clamp(700px, calc(100svh - 80px), 800px);
+  --mat-green: #315a40;
+  --mat-markings: rgb(246 237 185 / 34%);
+  --ink: #faf8ed;
+  --muted-ink: #f6f3e5;
+  --brand: #faf8ed;
+  --brand-soft: rgb(250 248 237 / 12%);
+  --line: rgb(246 237 185 / 27%);
+  --dark-line: rgb(246 237 185 / 48%);
+  color: var(--ink);
 }
 .pin-stage {
   height: var(--stage-height);
   position: sticky;
   top: 0;
-  background-color: var(--canvas);
-  background-image: var(--paper-grain);
-  background-size: 180px 180px;
-  background-repeat: repeat;
-  overflow: clip;
+  clip-path: inset(0 calc((100% - 100vw) / 2));
   isolation: isolate;
+}
+.scroll-story::before,
+.pin-stage::before {
+  content: "";
+  position: absolute;
+  inset-block: 0;
+  left: 50%;
+  width: 100vw;
+  transform: translateX(-50%);
+  background-color: var(--mat-green);
+  background-image: url("/cutting-mat.svg"), var(--paper-grain);
+  background-position: center top;
+  background-size: 240px 240px, 180px 180px;
+  background-repeat: repeat;
+  pointer-events: none;
+  z-index: -1;
+}
+.pin-stage::after {
+  content: "";
+  position: absolute;
+  inset: 16px calc((100% - 100vw) / 2 + 16px);
+  border: 1px solid var(--mat-markings);
+  background-image:
+    repeating-linear-gradient(
+      to right,
+      var(--mat-markings) 0 1px,
+      transparent 1px 12px
+    ),
+    repeating-linear-gradient(
+      to bottom,
+      var(--mat-markings) 0 1px,
+      transparent 1px 12px
+    );
+  background-size: 100% 6px, 6px 100%;
+  background-repeat: no-repeat;
+  pointer-events: none;
+  z-index: -1;
 }
 .stage-kicker {
   position: absolute;
@@ -525,8 +568,8 @@ section[tabindex="-1"]:focus {
   top: 64px;
   transform: rotate(9deg);
   padding: 8px 14px;
-  background: var(--brand-soft);
-  color: var(--brand);
+  background: var(--paper);
+  color: #30312b;
   font:
     700 13px/1.4 var(--font-body),
     sans-serif;
@@ -618,7 +661,7 @@ section[tabindex="-1"]:focus {
 .project-picks button[aria-pressed="true"] {
   background: var(--brand);
   border-color: var(--brand);
-  color: white;
+  color: var(--mat-green);
 }
 .project-picks button:hover:not([aria-pressed="true"]) {
   background: var(--brand-soft);
