@@ -4,7 +4,31 @@
 
 :root {
   color-scheme: light;
+  --canvas: #f2ebdf;
   --paper: #faf8ed;
+  --paper-pink: #f4d8dc;
+  --paper-sage: #edf0dc;
+  --paper-sky: #dce9eb;
+  --paper-grain: url("/paper-grain.svg");
+  --torn-edge: polygon(
+    0 18px, 3% 11px, 7% 15px, 10% 4px, 14% 9px,
+    18% 2px, 22% 14px, 26% 8px, 30% 18px, 34% 10px,
+    39% 5px, 43% 16px, 48% 3px, 52% 11px, 57% 19px,
+    61% 7px, 66% 14px, 70% 4px, 75% 10px, 80% 2px,
+    84% 17px, 88% 9px, 92% 15px, 96% 5px, 100% 11px,
+    100% calc(100% - 16px), 96% calc(100% - 8px),
+    92% calc(100% - 20px), 88% calc(100% - 11px),
+    83% calc(100% - 17px), 79% calc(100% - 4px),
+    74% calc(100% - 13px), 70% calc(100% - 7px),
+    65% calc(100% - 19px), 60% calc(100% - 10px),
+    56% calc(100% - 3px), 51% calc(100% - 16px),
+    47% calc(100% - 8px), 42% calc(100% - 21px),
+    38% calc(100% - 12px), 33% calc(100% - 5px),
+    29% calc(100% - 18px), 24% calc(100% - 9px),
+    20% calc(100% - 16px), 15% calc(100% - 3px),
+    11% calc(100% - 12px), 7% calc(100% - 19px),
+    3% calc(100% - 8px), 0 calc(100% - 14px)
+  );
   --ink: #25261f;
   --muted-ink: #636657;
   --brand: #30312b;
@@ -46,7 +70,10 @@ html {
 }
 body {
   margin: 0;
-  background: var(--paper);
+  background-color: var(--canvas);
+  background-image: var(--paper-grain);
+  background-size: 180px 180px;
+  background-repeat: repeat;
   color: var(--ink);
   font-family: var(--font-body), sans-serif;
   font-optical-sizing: auto;
@@ -206,7 +233,10 @@ section[tabindex="-1"]:focus {
   height: var(--stage-height);
   position: sticky;
   top: 0;
-  background: var(--paper);
+  background-color: var(--canvas);
+  background-image: var(--paper-grain);
+  background-size: 180px 180px;
+  background-repeat: repeat;
   overflow: clip;
   isolation: isolate;
 }
@@ -613,9 +643,76 @@ section[tabindex="-1"]:focus {
 }
 .collection {
   position: relative;
+  isolation: isolate;
+  --sheet-color: var(--paper-pink);
+  --sheet-grid: rgb(160 72 79 / 13%);
+  --sheet-grid-size: 34px;
   padding: 64px 0 70px;
-  border-top: 1px solid var(--line);
   scroll-margin-top: 24px;
+}
+.collection::before {
+  background-image:
+    linear-gradient(
+      to right,
+      transparent calc(100% - 1px),
+      var(--sheet-grid) calc(100% - 1px)
+    ),
+    linear-gradient(
+      to bottom,
+      transparent calc(100% - 1px),
+      var(--sheet-grid) calc(100% - 1px)
+    );
+  background-size: var(--sheet-grid-size) var(--sheet-grid-size);
+}
+.about-section,
+.certifications-section,
+.site-footer {
+  position: relative;
+  isolation: isolate;
+  --sheet-grid: transparent;
+}
+.about-section {
+  --sheet-color: var(--paper);
+}
+.certifications-section {
+  --sheet-color: var(--paper-sage);
+}
+.site-footer {
+  --sheet-color: var(--paper-sky);
+}
+.collection::before,
+.about-section::before,
+.certifications-section::before,
+.site-footer::before,
+.collection::after,
+.about-section::after,
+.certifications-section::after,
+.site-footer::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  width: 100vw;
+  transform: translateX(-50%);
+  clip-path: var(--torn-edge);
+  pointer-events: none;
+}
+.collection::before,
+.about-section::before,
+.certifications-section::before,
+.site-footer::before {
+  z-index: -2;
+  inset-block: -16px;
+  background-color: var(--sheet-color);
+}
+.collection::after,
+.about-section::after,
+.certifications-section::after,
+.site-footer::after {
+  z-index: -1;
+  inset-block: -16px;
+  background-image: var(--paper-grain);
+  background-size: 180px 180px;
+  opacity: 0.24;
 }
 .collection-title {
   display: flex;
@@ -687,7 +784,7 @@ section[tabindex="-1"]:focus {
   gap: clamp(28px, 5vw, 72px);
   align-items: center;
   padding: 36px 0;
-  border-top: 1px solid var(--line);
+  border-top: 1px solid rgb(160 72 79 / 23%);
 }
 .project-item[hidden] {
   display: none;
@@ -884,7 +981,6 @@ section[tabindex="-1"]:focus {
   color: var(--brand);
 }
 .certifications-section {
-  border-top: 1px solid var(--line);
   padding: 30px 0 42px;
 }
 .certification-card {
@@ -914,9 +1010,6 @@ section[tabindex="-1"]:focus {
 }
 .certification-card p > span {
   margin-inline: 6px;
-}
-.site-footer {
-  border-top: 1px solid var(--line);
 }
 .footer-invitation {
   display: flex;
