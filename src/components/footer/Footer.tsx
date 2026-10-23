@@ -1,5 +1,6 @@
 import { ArrowUpRight } from "lucide-react";
 import SocialMedia from "../social-media/SocialMedia";
+import { MotionToggle } from "../smooth-scroll/SmoothScroll";
 
 export default function Footer() {
   return (
@@ -19,6 +20,7 @@ export default function Footer() {
       <div className="footer-bottom">
         <p>© {new Date().getFullYear()} Natthawut Klangyod</p>
         <SocialMedia />
+        <MotionToggle />
         <a href="#main-content" className="back-top">
           Back to top ↑
         </a>

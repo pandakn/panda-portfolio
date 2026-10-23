@@ -1,26 +1,20 @@
 import type { Metadata } from "next";
-import { DM_Sans, Barlow_Condensed, Caveat } from "next/font/google";
+import { Bricolage_Grotesque, IBM_Plex_Sans } from "next/font/google";
 import "./globals.css";
 
 import Navbar from "@/components/nav-bar/Navbar";
 import { cn } from "@/lib/utils";
 import Footer from "@/components/footer/Footer";
+import SmoothScroll from "@/components/smooth-scroll/SmoothScroll";
 
-const bodyFont = DM_Sans({
+const bodyFont = IBM_Plex_Sans({
   subsets: ["latin"],
   variable: "--font-body",
   display: "swap",
 });
-const displayFont = Barlow_Condensed({
-  weight: ["700", "800"],
+const displayFont = Bricolage_Grotesque({
   subsets: ["latin"],
   variable: "--font-display",
-  display: "swap",
-});
-
-const handwritingFont = Caveat({
-  subsets: ["latin"],
-  variable: "--font-hand",
   display: "swap",
 });
 
@@ -51,15 +45,16 @@ export default function RootLayout({
         className={cn(
           bodyFont.variable,
           displayFont.variable,
-          handwritingFont.variable,
           "min-h-screen antialiased",
         )}
       >
-        <div className="page-shell">
-          <Navbar />
-          {children}
-          <Footer />
-        </div>
+        <SmoothScroll>
+          <div className="page-shell">
+            <Navbar />
+            {children}
+            <Footer />
+          </div>
+        </SmoothScroll>
       </body>
     </html>
   );

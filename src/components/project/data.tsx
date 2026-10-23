@@ -1,182 +1,174 @@
-import { type BentoGridItemProps } from "../ui/bento-grid";
-import TechStack from "./TechStack";
-import Thumbnail from "./Thumbnail";
+export type ProjectCategory = "Web apps" | "Backend" | "Audio" | "Play";
 
-const fretFlowImages = [
-  "/fret-flow/scales.webp",
-  "/fret-flow/chords-light.webp",
-  "/fret-flow/learn.webp",
-  "/fret-flow/practice.webp",
-  "/fret-flow/progress.webp",
-];
-const mayerismImages = [
-  "/mayerism/envelope-filter.webp",
-  "/mayerism/amp.webp",
-  "/mayerism/post-effects.webp",
-];
-const brickrImages = ["/brickr/studs.webp", "/brickr/flat.webp"];
+type ProjectPreview =
+  { kind: "image"; src: string; alt: string } | { kind: "api" };
 
-const sutScheduleImages = [
-  "/sut-schedule/home.jpeg",
-  "/sut-schedule/schedule.jpeg",
-  "/sut-schedule/search.jpeg",
-  "/sut-schedule/write.jpeg",
-  "/sut-schedule/blog.jpeg",
-  "/sut-schedule/comment.jpeg",
-];
+export type PortfolioProject = {
+  id: string;
+  title: string;
+  category: ProjectCategory;
+  stack: string;
+  tagline: string;
+  description: string;
+  preview: ProjectPreview;
+  webUrl: string | null;
+  githubLink: string;
+  attribution?: { label: string; href: string };
+};
 
-const suggestifyImages = [
-  "/suggestify/login.jpeg",
-  "/suggestify/home.jpeg",
-  "/suggestify/playlists.jpeg",
-];
+const fretFlow: PortfolioProject = {
+  id: "fret-flow",
+  title: "Fret Flow",
+  category: "Web apps",
+  stack: "Next.js · TypeScript",
+  tagline: "Find your way around the fretboard.",
+  description:
+    "Explore scales, chords and arpeggios on an interactive fretboard. See how the notes connect, then hear them played back.",
+  preview: {
+    kind: "image",
+    src: "/fret-flow/scales.webp",
+    alt: "Fret Flow's interactive guitar fretboard and scale controls",
+  },
+  webUrl: "https://fret-flow-guitar.vercel.app/en",
+  githubLink: "https://github.com/pandakn/fret-flow",
+};
 
-const favtifyImages = ["/favtify/login.gif", "/favtify/home.png"];
+const brickr: PortfolioProject = {
+  id: "brickr",
+  title: "brickr",
+  category: "Web apps",
+  stack: "Next.js · TypeScript",
+  tagline: "Your photos, a little more brick-shaped.",
+  description:
+    "Turn a photo into LEGO-style pixel art, right in your browser. Adjust the bricks, then download your mosaic and building guide.",
+  preview: {
+    kind: "image",
+    src: "/brickr/studs.webp",
+    alt: "A photo converted into a brick mosaic in brickr",
+  },
+  webUrl: "https://brickr.vercel.app/",
+  githubLink: "https://github.com/pandakn/brickr",
+};
 
-const pokedex = ["/pokedex/home-md.png"];
-const pikaGuess = ["/pika-guess/home.gif"];
+const sutSchedule: PortfolioProject = {
+  id: "sut-schedule",
+  title: "SUT Schedule",
+  category: "Web apps",
+  stack: "React · Node.js · MongoDB",
+  tagline: "A better plan for the next semester.",
+  description:
+    "A place for SUT students to plan classes and exchange course insights, stories and advice.",
+  preview: {
+    kind: "image",
+    src: "/sut-schedule/home.jpeg",
+    alt: "SUT Schedule's course planning and student community interface",
+  },
+  webUrl: null,
+  githubLink: "https://github.com/pandakn/sut-schedule",
+};
 
-const Skeleton = () => (
-  <div className="project-code-preview" aria-hidden="true">
-    <span className="project-code-symbol">{"{ go }"}</span>
-    <span className="project-code-label">A little less manual work.</span>
-  </div>
-);
+export const featuredProjects: readonly [
+  PortfolioProject,
+  PortfolioProject,
+  PortfolioProject,
+] = [fretFlow, brickr, sutSchedule];
 
-export const projectsData: BentoGridItemProps[] = [
+export const projectsData: readonly PortfolioProject[] = [
+  ...featuredProjects,
   {
-    title: "Fret Flow",
+    id: "sut-course-api",
+    title: "SUT Course API",
+    category: "Backend",
+    stack: "Go · Docker · AWS",
+    tagline: "A little less manual work.",
     description:
-      "A guitar practice companion for exploring scales, chords, and arpeggios on an interactive fretboard. See how the notes connect, then hear them played back.",
-    header: <Thumbnail images={fretFlowImages} title="Fret Flow" />,
-    className: "project-card-wide",
-    webUrl: "https://fret-flow-guitar.vercel.app/en",
-    githubLink: "https://github.com/pandakn/fret-flow",
-    techStack: (
-      <TechStack
-        techStack={["next", "react", "typescript", "tailwind", "vercel"]}
-      />
-    ),
+      "An API that collects course data from SUT's registration system, making it easier to build tools for students.",
+    preview: { kind: "api" },
+    webUrl: null,
+    githubLink: "https://github.com/pandakn/go-sut-course-api",
   },
   {
+    id: "mayerism",
     title: "Mayerism",
-    description: (
-      <>
-        Forked from{" "}
-        <a
-          href="https://github.com/timpelser/Mayerism"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="underline underline-offset-4 hover:text-foreground"
-        >
-          Mayerism by timpelser
-        </a>
-        . I added an envelope filter pedal to its amp and effects chain for
-        tones that respond to your playing dynamics.
-      </>
-    ),
-    header: <Thumbnail images={mayerismImages} title="Mayerism" />,
+    category: "Audio",
+    stack: "C++",
+    tagline: "A little more feeling in the signal.",
+    description:
+      "I added an envelope filter pedal to the amp and effects chain for tones that respond to your playing dynamics.",
+    preview: {
+      kind: "image",
+      src: "/mayerism/envelope-filter.webp",
+      alt: "Mayerism's guitar amp and envelope filter controls",
+    },
     webUrl: "https://mayerism.timpelser.com/",
     githubLink: "https://github.com/pandakn/Mayerism",
-    techStack: <TechStack techStack={["c++"]} />,
+    attribution: {
+      label: "Forked from Mayerism by timpelser",
+      href: "https://github.com/timpelser/Mayerism",
+    },
   },
   {
-    title: "brickr",
-    description:
-      "Turn a photo into LEGO-style pixel art, right in your browser. Play with brick sizes and stud textures, then download your mosaic and building guide.",
-    header: <Thumbnail images={brickrImages} title="brickr" />,
-    webUrl: "https://brickr.vercel.app/",
-    githubLink: "https://github.com/pandakn/brickr",
-    techStack: (
-      <TechStack
-        techStack={["next", "react", "typescript", "tailwind", "vercel"]}
-      />
-    ),
-  },
-  {
-    title: "SUT Schedule",
-    description:
-      "An easier way for SUT students to plan their class schedules and share stories, course insights, and advice with each other.",
-    header: <Thumbnail images={sutScheduleImages} title="SUT Schedule" />,
-    className: "project-card-wide",
-    githubLink: "https://github.com/pandakn/sut-schedule",
-    techStack: (
-      <TechStack
-        techStack={[
-          "react",
-          "typescript",
-          "tailwind",
-          "nodejs",
-          "mongo",
-          "docker",
-        ]}
-      />
-    ),
-  },
-  {
-    title: "SUT Course API",
-    description:
-      "A Go API that collects course data from SUT’s registration system, making it easier to build tools for students.",
-    header: <Skeleton />,
-    githubLink: "https://github.com/pandakn/go-sut-course-api",
-    techStack: <TechStack techStack={["golang", "docker", "aws"]} />,
-  },
-  {
+    id: "favtify",
     title: "Favtify",
+    category: "Web apps",
+    stack: "React · Spotify",
+    tagline: "Your listening habits, at a glance.",
     description:
       "Your nine most-played Spotify tracks, together in one little snapshot.",
-    header: <Thumbnail images={favtifyImages} title="Favtify" />,
+    preview: {
+      kind: "image",
+      src: "/favtify/home.png",
+      alt: "Favtify's collection of most-played Spotify tracks",
+    },
     webUrl: "https://favtify.vercel.app/",
     githubLink: "https://github.com/pandakn/favtify",
-    techStack: (
-      <TechStack
-        techStack={[
-          "react",
-          "javascript",
-          "tailwind",
-          "spotify",
-          "auth",
-          "vercel",
-        ]}
-      />
-    ),
   },
   {
+    id: "suggestify",
     title: "Suggestify",
+    category: "Web apps",
+    stack: "Next.js · Spotify",
+    tagline: "Meet your next favorite track.",
     description:
       "Find twelve new tracks based on your Spotify taste, then save your discoveries straight to a playlist.",
-    header: <Thumbnail images={suggestifyImages} title="Suggestify" />,
-    className: "project-card-wide",
+    preview: {
+      kind: "image",
+      src: "/suggestify/home.jpeg",
+      alt: "Suggested tracks and playlist controls in Suggestify",
+    },
     webUrl: "https://suggestify-pnd.vercel.app/login",
     githubLink: "https://github.com/pandakn/suggestify",
-    techStack: (
-      <TechStack
-        techStack={["next", "typescript", "tailwind", "spotify", "vercel"]}
-      />
-    ),
   },
   {
+    id: "pika-guess",
     title: "Pika Guess",
+    category: "Play",
+    stack: "Svelte · Pokémon",
+    tagline: "Know that face?",
     description:
       "A Pokémon guessing game built while learning Svelte. Match the name to the face and see how many you know.",
-    header: <Thumbnail images={pikaGuess} title="Pika Guess" />,
+    preview: {
+      kind: "image",
+      src: "/pika-guess/home.jpeg",
+      alt: "The Pokémon guessing game Pika Guess",
+    },
     webUrl: "https://pika-guess.vercel.app/",
     githubLink: "https://github.com/pandakn/pika-guess",
-    techStack: (
-      <TechStack techStack={["svelte", "tailwind", "pokemon", "vercel"]} />
-    ),
   },
   {
+    id: "pokedex",
     title: "Pokédex",
+    category: "Play",
+    stack: "React · JavaScript",
+    tagline: "A very big collection of creatures.",
     description:
       "A Pokémon reference built with React. A small project for exploring a very big collection of creatures.",
-    header: <Thumbnail images={pokedex} title="Pokédex" />,
+    preview: {
+      kind: "image",
+      src: "/pokedex/home-md.png",
+      alt: "Pokémon entries and search in Pokédex",
+    },
     webUrl: "https://pokemon-dex-two.vercel.app/",
     githubLink: "https://github.com/pandakn/pokemon-dex?tab=readme-ov-file",
-    techStack: (
-      <TechStack
-        techStack={["react", "javascript", "tailwind", "pokemon", "vercel"]}
-      />
-    ),
   },
 ];
