@@ -1,3 +1,5 @@
+import { SITE_LINKS } from "@/lib/links";
+
 export type ProjectCategory = "Web apps" | "Backend" | "Audio" | "Play";
 
 type ProjectPreview =
@@ -29,8 +31,8 @@ const fretFlow: PortfolioProject = {
     src: "/fret-flow/scales.webp",
     alt: "Fret Flow's interactive guitar fretboard and scale controls",
   },
-  webUrl: "https://fret-flow-guitar.vercel.app/en",
-  githubLink: "https://github.com/pandakn/fret-flow",
+  webUrl: SITE_LINKS.projects.fretFlow.website,
+  githubLink: SITE_LINKS.projects.fretFlow.source,
 };
 
 const brickr: PortfolioProject = {
@@ -46,8 +48,8 @@ const brickr: PortfolioProject = {
     src: "/brickr/studs.webp",
     alt: "A photo converted into a brick mosaic in brickr",
   },
-  webUrl: "https://brickr.vercel.app/",
-  githubLink: "https://github.com/pandakn/brickr",
+  webUrl: SITE_LINKS.projects.brickr.website,
+  githubLink: SITE_LINKS.projects.brickr.source,
 };
 
 const sutSchedule: PortfolioProject = {
@@ -64,7 +66,7 @@ const sutSchedule: PortfolioProject = {
     alt: "SUT Schedule's course planning and student community interface",
   },
   webUrl: null,
-  githubLink: "https://github.com/pandakn/sut-schedule",
+  githubLink: SITE_LINKS.projects.sutSchedule.source,
 };
 
 export const featuredProjects: readonly [
@@ -85,7 +87,7 @@ export const projectsData: readonly PortfolioProject[] = [
       "An API that collects course data from SUT's registration system, making it easier to build tools for students.",
     preview: { kind: "api" },
     webUrl: null,
-    githubLink: "https://github.com/pandakn/go-sut-course-api",
+    githubLink: SITE_LINKS.projects.sutCourseApi.source,
   },
   {
     id: "mayerism",
@@ -100,11 +102,11 @@ export const projectsData: readonly PortfolioProject[] = [
       src: "/mayerism/envelope-filter.webp",
       alt: "Mayerism's guitar amp and envelope filter controls",
     },
-    webUrl: "https://mayerism.timpelser.com/",
-    githubLink: "https://github.com/pandakn/Mayerism",
+    webUrl: SITE_LINKS.projects.mayerism.website,
+    githubLink: SITE_LINKS.projects.mayerism.source,
     attribution: {
       label: "Forked from Mayerism by timpelser",
-      href: "https://github.com/timpelser/Mayerism",
+      href: SITE_LINKS.projects.mayerism.originalSource,
     },
   },
   {
@@ -120,8 +122,8 @@ export const projectsData: readonly PortfolioProject[] = [
       src: "/favtify/home.png",
       alt: "Favtify's collection of most-played Spotify tracks",
     },
-    webUrl: "https://favtify.vercel.app/",
-    githubLink: "https://github.com/pandakn/favtify",
+    webUrl: SITE_LINKS.projects.favtify.website,
+    githubLink: SITE_LINKS.projects.favtify.source,
   },
   {
     id: "suggestify",
@@ -136,8 +138,8 @@ export const projectsData: readonly PortfolioProject[] = [
       src: "/suggestify/home.jpeg",
       alt: "Suggested tracks and playlist controls in Suggestify",
     },
-    webUrl: "https://suggestify-pnd.vercel.app/login",
-    githubLink: "https://github.com/pandakn/suggestify",
+    webUrl: SITE_LINKS.projects.suggestify.website,
+    githubLink: SITE_LINKS.projects.suggestify.source,
   },
   {
     id: "pika-guess",
@@ -152,8 +154,8 @@ export const projectsData: readonly PortfolioProject[] = [
       src: "/pika-guess/home.jpeg",
       alt: "The Pokémon guessing game Pika Guess",
     },
-    webUrl: "https://pika-guess.vercel.app/",
-    githubLink: "https://github.com/pandakn/pika-guess",
+    webUrl: SITE_LINKS.projects.pikaGuess.website,
+    githubLink: SITE_LINKS.projects.pikaGuess.source,
   },
   {
     id: "pokedex",
@@ -168,7 +170,7 @@ export const projectsData: readonly PortfolioProject[] = [
       src: "/pokedex/home-md.png",
       alt: "Pokémon entries and search in Pokédex",
     },
-    webUrl: "https://pokemon-dex-two.vercel.app/",
-    githubLink: "https://github.com/pandakn/pokemon-dex?tab=readme-ov-file",
+    webUrl: SITE_LINKS.projects.pokedex.website,
+    githubLink: SITE_LINKS.projects.pokedex.source,
   },
 ];

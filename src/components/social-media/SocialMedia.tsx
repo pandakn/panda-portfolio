@@ -1,22 +1,23 @@
 import { IconBrandGithub, IconBrandLinkedin } from "@tabler/icons-react";
 import { NotebookPen } from "lucide-react";
 import Link from "next/link";
+import { SITE_LINKS } from "@/lib/links";
 
 export const socialMedia = [
   {
     icon: <IconBrandGithub />,
     label: "GitHub",
-    href: "https://github.com/pandakn",
+    href: SITE_LINKS.profiles.github,
   },
   {
     icon: <IconBrandLinkedin />,
     label: "LinkedIn",
-    href: "https://www.linkedin.com/in/ntthwt/",
+    href: SITE_LINKS.profiles.linkedin,
   },
   {
     icon: <NotebookPen />,
     label: "Medium",
-    href: "https://medium.com/@natthawut.k",
+    href: SITE_LINKS.profiles.medium,
   },
 ];
 

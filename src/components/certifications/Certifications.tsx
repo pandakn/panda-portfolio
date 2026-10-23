@@ -1,5 +1,6 @@
 import Image from "next/image";
 import awsBadge from "/public/aws-solutions-architect-associate.png";
+import { SITE_LINKS } from "@/lib/links";
 
 export default function Certifications() {
   return (
@@ -28,7 +29,7 @@ export default function Certifications() {
         </div>
         <a
           className="text-link"
-          href="https://www.credly.com/badges/bee88c48-3c60-40f1-8105-6ff17cc49b19/public_url"
+          href={SITE_LINKS.credentials.awsSolutionsArchitect}
           target="_blank"
           rel="noopener noreferrer"
         >

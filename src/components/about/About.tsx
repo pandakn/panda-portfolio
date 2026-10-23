@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { SITE_LINKS } from "@/lib/links";
 
 export default function About() {
   return (
@@ -40,7 +41,7 @@ export default function About() {
         </p>
         <a
           className="text-link"
-          href="https://www.linkedin.com/in/ntthwt/"
+          href={SITE_LINKS.profiles.linkedin}
           target="_blank"
           rel="noopener noreferrer"
         >

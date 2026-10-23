@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { featuredProjects } from "../project/data";
 import { useMotionPreference } from "../smooth-scroll/SmoothScroll";
 import Monitor from "./Monitor";
+import { SITE_LINKS } from "@/lib/links";
 
 export default function Hero() {
   const [selected, setSelected] = useState(featuredProjects[0]);
@@ -189,7 +190,7 @@ export default function Hero() {
               </button>
             ))}
           </div>
-          <a className="browse-all" href="#project">
+          <a className="browse-all" href={SITE_LINKS.sections.projects}>
             All projects <span aria-hidden="true">↓</span>
           </a>
         </div>

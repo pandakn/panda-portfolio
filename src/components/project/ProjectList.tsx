@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import { projectsData, type ProjectCategory } from "./data";
+import { SITE_LINKS } from "@/lib/links";
 
 const filters: readonly ("All" | ProjectCategory)[] = [
   "All",
@@ -142,7 +143,7 @@ export default function ProjectList() {
       </div>
       <a
         className="github-more"
-        href="https://github.com/pandakn"
+        href={SITE_LINKS.profiles.github}
         target="_blank"
         rel="noopener noreferrer"
       >
