@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   authors: [{ name: SITE.author, url: SITE.url }],
   creator: SITE.author,
   icons: {
-    icon: { url: "/avatar-smile.svg", type: "image/svg+xml", sizes: "any" },
+    icon: { url: "/favicon.png", type: "image/png", sizes: "192x192" },
   },
 };
 

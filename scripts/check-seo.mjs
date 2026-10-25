@@ -63,6 +63,18 @@ assert.equal(meta("og:title"), meta("twitter:title"));
 assert.equal(meta("og:description"), meta("description"));
 assert.equal(meta("twitter:card"), "summary_large_image");
 
+const favicon = tags(head, "link").find(
+  (tag) => tag.rel === "icon" && tag.type === "image/png",
+);
+assert.ok(favicon, "Provide a PNG favicon supported by Google Search");
+assert.equal(favicon.sizes, "192x192");
+const faviconUrl = new URL(favicon.href, canonical);
+assert.equal(faviconUrl.origin, canonical.origin);
+const faviconImage = await readFile(new URL(`.${faviconUrl.pathname}`, output));
+assert.equal(faviconImage.subarray(0, 8).toString("hex"), "89504e470d0a1a0a");
+assert.equal(faviconImage.readUInt32BE(16), 192);
+assert.equal(faviconImage.readUInt32BE(20), 192);
+
 for (const name of ["og:image", "twitter:image"]) {
   const imageUrl = new URL(meta(name));
   assert.equal(imageUrl.origin, canonical.origin);
