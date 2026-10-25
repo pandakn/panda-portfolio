@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Certifications from "@/components/certifications/Certifications";
 import { SITE_LINKS } from "@/lib/links";
 
 export default function About() {
@@ -51,7 +52,6 @@ export default function About() {
             height={550}
             sizes="(max-width: 640px) 85vw, 400px"
           />
-          <figcaption>the person behind the pixels :)</figcaption>
         </figure>
         <figure className="board-photo board-desk pinned-paper">
           <Image
@@ -61,7 +61,6 @@ export default function About() {
             height={867}
             sizes="(max-width: 640px) 42vw, 270px"
           />
-          <figcaption>where the ideas happen</figcaption>
         </figure>
         <figure className="board-photo board-sunlight taped">
           <Image
@@ -71,7 +70,6 @@ export default function About() {
             height={800}
             sizes="(max-width: 640px) 42vw, 250px"
           />
-          <figcaption>same desk, golden hour.</figcaption>
         </figure>
         <figure className="board-photo board-offline">
           <Image
@@ -81,7 +79,6 @@ export default function About() {
             height={640}
             sizes="(max-width: 640px) 40vw, 190px"
           />
-          <figcaption>out of office</figcaption>
         </figure>
 
         <figure className="board-receipt taped">
@@ -92,7 +89,6 @@ export default function About() {
             height={1810}
             sizes="(max-width: 640px) 44vw, 200px"
           />
-          <figcaption>on repeat ♫</figcaption>
         </figure>
         <div className="board-guitar">
           <Image
@@ -119,6 +115,7 @@ export default function About() {
             My guitar practice tool, Fret Flow ↗
           </a>
         </div>
+        <Certifications />
         <div className="board-keepsakes" aria-hidden="true">
           <div className="scrap-title">
             <span>a little</span>
@@ -199,7 +196,6 @@ export default function About() {
                 height={800}
                 sizes="180px"
               />
-              <span>23 / 10</span>
             </div>
             <span className="camera-lens" />
             <span className="camera-flash" />
@@ -227,7 +223,6 @@ export default function About() {
               height={640}
               sizes="100px"
             />
-            <span>001 &nbsp; LIFE, UNFILTERED</span>
           </div>
           <div className="scrap-postage">
             <span>
