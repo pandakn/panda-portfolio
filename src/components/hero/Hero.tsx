@@ -90,7 +90,10 @@ export default function Hero() {
       <div ref={stageRef} className="pin-stage">
         <h1 id="hero-title" className="hero-heading">
           Hey!
-          <span className="sr-only"> I&apos;m Keem, a software engineer.</span>
+          <span className="sr-only">
+            {" "}
+            I&apos;m Natthawut Klangyod (Keem), a software engineer.
+          </span>
         </h1>
         <div
           className="hero-photo-sticker hero-photo-camera"

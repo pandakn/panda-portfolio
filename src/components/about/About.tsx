@@ -18,8 +18,8 @@ export default function About() {
             I’m <em>Keem.</em>
           </h2>
           <p>
-            I’m Natthawut, a software engineer who enjoys turning a “what if?”
-            into something you can actually use.
+            I&apos;m Natthawut Klangyod, a software engineer. I build web apps
+            and backend tools with React, Next.js, TypeScript and Go.
           </p>
           <div className="about-actions">
             <a

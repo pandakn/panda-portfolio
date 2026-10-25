@@ -6,6 +6,7 @@ import Navbar from "@/components/nav-bar/Navbar";
 import { cn } from "@/lib/utils";
 import Footer from "@/components/footer/Footer";
 import SmoothScroll from "@/components/smooth-scroll/SmoothScroll";
+import { SITE } from "@/lib/site";
 
 const bodyFont = DM_Sans({
   subsets: ["latin"],
@@ -20,21 +21,18 @@ const displayFont = DM_Serif_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Keem Natthawut - Software Engineer Portfolio",
-  description:
-    "Welcome to Keem's portfolio! Explore my projects and experience as a Software Engineer.",
+  metadataBase: new URL(SITE.url),
+  title: {
+    default: SITE.title,
+    template: `%s | ${SITE.author}`,
+  },
+  description: SITE.description,
+  applicationName: SITE.name,
+  authors: [{ name: SITE.author, url: SITE.url }],
+  creator: SITE.author,
   icons: {
     icon: { url: "/avatar-smile.svg", type: "image/svg+xml", sizes: "any" },
   },
-  keywords: [
-    "portfolio",
-    "resume",
-    "cv",
-    "web portfolio",
-    "software engineer",
-    "projects",
-    "experience",
-  ],
 };
 
 export default function RootLayout({

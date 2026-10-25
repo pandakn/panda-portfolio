@@ -74,7 +74,7 @@ export default function ProjectList() {
               {project.preview.kind === "image" ? (
                 <Image
                   src={project.preview.src}
-                  alt=""
+                  alt={project.preview.alt}
                   fill
                   sizes="(max-width: 640px) calc(100vw - 40px), (max-width: 1100px) 42vw, 470px"
                 />
