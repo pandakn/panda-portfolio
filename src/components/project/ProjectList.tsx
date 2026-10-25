@@ -29,7 +29,7 @@ export default function ProjectList() {
             I&apos;ve made<span className="accent-period">.</span>
           </span>
         </h2>
-        <span role="status">
+        <span role="status" data-nosnippet="">
           {String(count).padStart(2, "0")}{" "}
           {count === 1 ? "project" : "projects"}
           <span className="sr-only">
@@ -43,7 +43,12 @@ export default function ProjectList() {
         <br className="desktop-break" /> Choose a project and take a look
         inside.
       </p>
-      <div className="filters" role="group" aria-label="Filter projects">
+      <div
+        className="filters"
+        role="group"
+        aria-label="Filter projects"
+        data-nosnippet=""
+      >
         {filters.map((category) => (
           <button
             type="button"

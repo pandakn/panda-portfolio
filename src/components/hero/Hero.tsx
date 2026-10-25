@@ -7,6 +7,7 @@ import { featuredProjects } from "../project/data";
 import { useMotionPreference } from "../smooth-scroll/SmoothScroll";
 import Monitor from "./Monitor";
 import { SITE_LINKS } from "@/lib/links";
+import { SITE } from "@/lib/site";
 
 export default function Hero() {
   const [selected, setSelected] = useState(featuredProjects[0]);
@@ -88,13 +89,9 @@ export default function Hero() {
       aria-labelledby="hero-title"
     >
       <div ref={stageRef} className="pin-stage">
-        <h1 id="hero-title" className="hero-heading">
+        <p className="hero-heading" aria-hidden="true">
           Hey!
-          <span className="sr-only">
-            {" "}
-            I&apos;m Natthawut Klangyod (Keem), a software engineer.
-          </span>
-        </h1>
+        </p>
         <div
           className="hero-photo-sticker hero-photo-camera"
           aria-hidden="true"
@@ -160,6 +157,11 @@ export default function Hero() {
         <Monitor selectedId={selected.id} />
         <div className="featured-copy">
           <div>
+            <h1 id="hero-title" className="project-counter">
+              {SITE.author} ({SITE.nickname})
+              <br />
+              Software engineer
+            </h1>
             <h2 className="featured-title">{selected.title}</h2>
             <p className="featured-subtitle">{selected.tagline}</p>
           </div>
@@ -174,7 +176,7 @@ export default function Hero() {
             <span className="sr-only"> (opens in a new tab)</span>
           </a>
         </div>
-        <div className="feature-controls">
+        <div className="feature-controls" data-nosnippet="">
           <div
             className="project-picks"
             role="group"

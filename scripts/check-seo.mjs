@@ -1,8 +1,67 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
+import { parseArgs } from "node:util";
 
 const output = new URL("../out/", import.meta.url);
-const read = (path) => readFile(new URL(path, output), "utf8");
+const production = new URL("https://www.heykeem.com/");
+const { values } = parseArgs({
+  options: {
+    live: { type: "boolean", default: false },
+    url: { type: "string", default: production.href },
+  },
+});
+const live = values.live;
+const target = new URL(values.url);
+
+async function readAsset(path) {
+  if (!live) return readFile(new URL(path, output));
+
+  const missingPage = path === "404.html";
+  const url = new URL(
+    missingPage
+      ? "/__seo-check-missing-page__"
+      : path === "index.html"
+        ? "/"
+        : path,
+    target,
+  );
+  const response = await fetch(url, {
+    redirect: "manual",
+    signal: AbortSignal.timeout(15_000),
+    headers: {
+      "User-Agent":
+        "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)",
+    },
+  });
+  assert.equal(
+    response.status,
+    missingPage ? 404 : 200,
+    `Unexpected status for ${url}`,
+  );
+  if (!missingPage) {
+    assert.doesNotMatch(
+      response.headers.get("x-robots-tag") ?? "",
+      /noindex/i,
+      `${url} must be indexable`,
+    );
+    const mimeTypes = {
+      ".png": "image/png",
+      ".xml": "application/xml",
+      ".txt": "text/plain",
+      ".html": "text/html",
+    };
+    for (const [extension, mimeType] of Object.entries(mimeTypes)) {
+      if (path.endsWith(extension))
+        assert.ok(
+          response.headers.get("content-type")?.startsWith(mimeType),
+          `Wrong content type for ${url}`,
+        );
+    }
+  }
+  return Buffer.from(await response.arrayBuffer());
+}
+
+const read = async (path) => (await readAsset(path)).toString("utf8");
 const [html, notFound, robots, sitemap] = await Promise.all([
   read("index.html"),
   read("404.html"),
@@ -70,7 +129,7 @@ assert.ok(favicon, "Provide a PNG favicon supported by Google Search");
 assert.equal(favicon.sizes, "192x192");
 const faviconUrl = new URL(favicon.href, canonical);
 assert.equal(faviconUrl.origin, canonical.origin);
-const faviconImage = await readFile(new URL(`.${faviconUrl.pathname}`, output));
+const faviconImage = await readAsset(`.${faviconUrl.pathname}`);
 assert.equal(faviconImage.subarray(0, 8).toString("hex"), "89504e470d0a1a0a");
 assert.equal(faviconImage.readUInt32BE(16), 192);
 assert.equal(faviconImage.readUInt32BE(20), 192);
@@ -78,7 +137,7 @@ assert.equal(faviconImage.readUInt32BE(20), 192);
 for (const name of ["og:image", "twitter:image"]) {
   const imageUrl = new URL(meta(name));
   assert.equal(imageUrl.origin, canonical.origin);
-  const image = await readFile(new URL(`.${imageUrl.pathname}`, output));
+  const image = await readAsset(`.${imageUrl.pathname}`);
   assert.equal(image.subarray(0, 8).toString("hex"), "89504e470d0a1a0a");
   assert.equal(image.readUInt32BE(16), 1200);
   assert.equal(image.readUInt32BE(20), 630);
@@ -88,6 +147,19 @@ for (const name of ["og:image", "twitter:image"]) {
 const headings = [...html.matchAll(/<h1\b[^>]*>([\s\S]*?)<\/h1>/g)];
 assert.equal(headings.length, 1, "Homepage must have one H1");
 assert.match(headings[0][1], /Natthawut Klangyod/);
+assert.match(headings[0][1], /Software engineer/);
+assert.doesNotMatch(
+  headings[0][0],
+  /sr-only/,
+  "Show the author's identity in the hero, not only screen-reader text",
+);
+for (const className of ["feature-controls", "filters", "footer-bottom"]) {
+  const controls = tags(html, "div").find((tag) => tag.class === className);
+  assert.ok(
+    controls && Object.hasOwn(controls, "data-nosnippet"),
+    `${className} must not supply search snippet text`,
+  );
+}
 const about = html.match(
   /<section\b[^>]*id="about"[^>]*>([\s\S]*?)<\/section>/,
 );
@@ -97,10 +169,12 @@ assert.equal(
   tags(html, "article").filter((tag) => tag.class === "project-item").length,
   9,
 );
-for (const image of tags(html, "img")) {
-  if (!image.src?.startsWith("/")) continue;
-  await readFile(new URL(`.${new URL(image.src, canonical).pathname}`, output));
-}
+const imagePaths = new Set(
+  tags(html, "img")
+    .filter((image) => image.src?.startsWith("/"))
+    .map((image) => `.${new URL(image.src, canonical).pathname}`),
+);
+await Promise.all([...imagePaths].map(readAsset));
 
 const scripts = [...html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/g)];
 const jsonLd = scripts.filter(([, attributes]) =>
@@ -118,6 +192,7 @@ assert.equal(person.url, canonical.href);
 assert.equal(profile.mainEntity["@id"], person["@id"]);
 assert.equal(profile.isPartOf["@id"], website["@id"]);
 assert.equal(website.url, canonical.href);
+assert.ok(website.alternateName.includes("heykeem.com"));
 assert.ok(person.sameAs.includes("https://github.com/pandakn"));
 assert.ok(person.sameAs.includes("https://www.linkedin.com/in/ntthwt/"));
 
@@ -144,6 +219,27 @@ assert.equal(
   "404 page must not claim the homepage canonical",
 );
 
+if (live) {
+  for (const address of [
+    "https://ntthwt.vercel.app/",
+    "https://heykeem.com/",
+  ]) {
+    const response = await fetch(address, {
+      redirect: "manual",
+      signal: AbortSignal.timeout(15_000),
+    });
+    assert.ok(
+      [301, 308].includes(response.status),
+      `${address} must permanently redirect`,
+    );
+    assert.equal(
+      new URL(response.headers.get("location"), address).href,
+      production.href,
+    );
+    await response.body?.cancel();
+  }
+}
+
 console.log(
-  "SEO checks passed: metadata, canonical, crawl files, profile data, social images, prerendered content, local images, and 404.",
+  `${live ? `Live (${target.href})` : "Export"} SEO checks passed: metadata, canonical, crawl files, profile data, images, prerendered content, and 404${live ? ", plus permanent domain redirects" : ""}.`,
 );

@@ -52,7 +52,7 @@ const profileData = {
       "@id": websiteId,
       url: SITE.url,
       name: SITE.name,
-      alternateName: [SITE.author, "Keem's portfolio"],
+      alternateName: [SITE.author, "Keem's portfolio", "heykeem.com"],
       inLanguage: "en",
       author: { "@id": personId },
     },
