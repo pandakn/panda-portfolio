@@ -154,6 +154,16 @@ export default function Hero() {
             draggable={false}
           />
         </div>
+        <div className="hero-photo-sticker hero-photo-smile" aria-hidden="true">
+          <Image
+            src="/stickers/keem-smile.png"
+            alt=""
+            width={500}
+            height={500}
+            loading="eager"
+            draggable={false}
+          />
+        </div>
         <Monitor selectedId={selected.id} />
         <div className="featured-copy">
           <div>
