@@ -2,15 +2,23 @@
 
 import { useLenis } from "lenis/react";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
-import { featuredProjects } from "../project/data";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { usePortfolioContent } from "@/sanity/content";
 import { useMotionPreference } from "../smooth-scroll/SmoothScroll";
 import Monitor from "./Monitor";
 import { SITE_LINKS } from "@/lib/links";
 import { SITE } from "@/lib/site";
 
 export default function Hero() {
-  const [selected, setSelected] = useState(featuredProjects[0]);
+  const { projects } = usePortfolioContent();
+  const featuredProjects = useMemo(
+    () => projects.filter((project) => project.featured),
+    [projects],
+  );
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const selected =
+    featuredProjects.find((project) => project.id === selectedId) ??
+    featuredProjects[0];
   const [announcement, setAnnouncement] = useState("");
   const storyRef = useRef<HTMLElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
@@ -34,7 +42,9 @@ export default function Hero() {
       const next =
         featuredProjects[Math.floor(progress * featuredProjects.length)];
       if (next)
-        setSelected((previous) => (previous.id === next.id ? previous : next));
+        setSelectedId((previous) =>
+          previous === next.id ? previous : next.id,
+        );
     };
     const measure = () => {
       start = story.getBoundingClientRect().top + window.scrollY;
@@ -54,12 +64,12 @@ export default function Hero() {
       window.removeEventListener("scroll", onScroll);
       cancelAnimationFrame(frame);
     };
-  }, [reduced]);
+  }, [reduced, featuredProjects]);
 
   function selectProject(index: number) {
     const project = featuredProjects[index];
     if (!project) return;
-    setSelected(project);
+    setSelectedId(project.id);
     setAnnouncement(`${project.title}. ${project.tagline}`);
     const story = storyRef.current;
     const stage = stageRef.current;
@@ -78,8 +88,6 @@ export default function Hero() {
     if (lenis) lenis.scrollTo(target, { immediate: true });
     else window.scrollTo({ top: target, behavior: "instant" });
   }
-
-  const selectedIndex = featuredProjects.indexOf(selected);
 
   return (
     <section
@@ -164,7 +172,7 @@ export default function Hero() {
             draggable={false}
           />
         </div>
-        <Monitor selectedId={selected.id} />
+        <Monitor selectedId={selected?.id} projects={featuredProjects} />
         <div className="featured-copy">
           <div>
             <h1 id="hero-title" className="project-counter">
@@ -172,19 +180,23 @@ export default function Hero() {
               <br />
               Software engineer
             </h1>
-            <h2 className="featured-title">{selected.title}</h2>
-            <p className="featured-subtitle">{selected.tagline}</p>
+            {selected && <h2 className="featured-title">{selected.title}</h2>}
+            {selected && (
+              <p className="featured-subtitle">{selected.tagline}</p>
+            )}
           </div>
-          <a
-            className="featured-link"
-            href={selected.webUrl ?? selected.githubLink}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {selected.webUrl ? "Explore" : "Source for"} {selected.title}
-            <span aria-hidden="true">↗</span>
-            <span className="sr-only"> (opens in a new tab)</span>
-          </a>
+          {selected && (
+            <a
+              className="featured-link"
+              href={selected.webUrl ?? selected.githubLink}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {selected.webUrl ? "Explore" : "Source for"} {selected.title}
+              <span aria-hidden="true">↗</span>
+              <span className="sr-only"> (opens in a new tab)</span>
+            </a>
+          )}
         </div>
         <div className="feature-controls" data-nosnippet="">
           <div
@@ -199,7 +211,7 @@ export default function Hero() {
                 onClick={() => selectProject(index)}
                 aria-label={`Show ${project.title}`}
                 aria-controls="monitor-screen"
-                aria-pressed={project.id === selected.id}
+                aria-pressed={project.id === selected?.id}
               >
                 {String(index + 1).padStart(2, "0")}
               </button>

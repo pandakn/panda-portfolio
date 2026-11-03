@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import { projectsData, type ProjectCategory } from "./data";
+import { type ProjectCategory } from "./data";
+import { usePortfolioContent } from "@/sanity/content";
 import { SITE_LINKS } from "@/lib/links";
 
 const filters: readonly ("All" | ProjectCategory)[] = [
@@ -14,6 +15,7 @@ const filters: readonly ("All" | ProjectCategory)[] = [
 ];
 
 export default function ProjectList() {
+  const { projects: projectsData } = usePortfolioContent();
   const [filter, setFilter] = useState<(typeof filters)[number]>("All");
   const count = projectsData.filter(
     (project) => filter === "All" || project.category === filter,
@@ -86,8 +88,10 @@ export default function ProjectList() {
               ) : (
                 <div className="api-art">
                   <span>{"{ }"}</span>
-                  <b>Go / SUT Course API</b>
-                  <small>Course data for student tools.</small>
+                  <b>
+                    {project.stack} / {project.title}
+                  </b>
+                  <small>{project.tagline}</small>
                 </div>
               )}
               <span className="preview-arrow" aria-hidden="true">

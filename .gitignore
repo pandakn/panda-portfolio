@@ -39,3 +39,7 @@ next-env.d.ts
 
 # agents
 .agents/plans
+
+# Sanity Studio build and local state
+/dist/
+/.sanity/

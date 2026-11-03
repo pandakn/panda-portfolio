@@ -9,7 +9,9 @@
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "check:seo": "node scripts/check-seo.mjs",
-    "check:seo:live": "node scripts/check-seo.mjs --live"
+    "check:seo:live": "node scripts/check-seo.mjs --live",
+    "studio": "sanity dev",
+    "studio:build": "sanity build"
   },
   "dependencies": {
     "@radix-ui/react-aspect-ratio": "^1.2.0",
@@ -29,11 +31,15 @@
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
     "react-rough-notation": "^1.0.8",
+    "sanity": "^6.21.0",
+    "styled-components": "^6.6.0",
     "tailwind-merge": "^3.7.0",
     "tailwindcss-animate": "^1.0.7",
-    "three": "^0.186.1"
+    "three": "^0.186.1",
+    "zod": "^4.6.7"
   },
   "devDependencies": {
+    "@sanity/cli": "^8.27.0",
     "@tailwindcss/postcss": "^4.3.3",
     "@types/node": "^26.6.5",
     "@types/react": "^19.3.0",

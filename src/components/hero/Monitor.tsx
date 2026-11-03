@@ -1,7 +1,16 @@
 import Image from "next/image";
-import { featuredProjects } from "../project/data";
+import type { PortfolioProject } from "../project/data";
 
-export default function Monitor({ selectedId }: { selectedId: string }) {
+export default function Monitor({
+  selectedId,
+  projects,
+}: {
+  selectedId?: string;
+  projects: readonly Pick<
+    PortfolioProject,
+    "id" | "preview" | "title" | "stack"
+  >[];
+}) {
   return (
     <div className="hardware-stage">
       <span className="hardware-star" aria-hidden="true">
@@ -12,7 +21,7 @@ export default function Monitor({ selectedId }: { selectedId: string }) {
         <div className="case-front">
           <div className="screen-surround">
             <div className="screen-glass" id="monitor-screen">
-              {featuredProjects.map((project, index) =>
+              {projects.map((project, index) =>
                 project.preview.kind === "image" ? (
                   <Image
                     key={project.id}
@@ -29,6 +38,13 @@ export default function Monitor({ selectedId }: { selectedId: string }) {
                     }
                     aria-hidden={selectedId !== project.id}
                   />
+                ) : selectedId === project.id ? (
+                  <div className="api-art" key={project.id}>
+                    <span>{"{ }"}</span>
+                    <b>
+                      {project.stack} / {project.title}
+                    </b>
+                  </div>
                 ) : null,
               )}
             </div>
